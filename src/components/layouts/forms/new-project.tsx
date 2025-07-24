@@ -54,6 +54,7 @@ const formSchema = z.object({
     .string()
     .min(15, "A descrição deve ter no mínimo 15 caracteres")
     .trim(),
+  repo_url: z.url("URL inválida"),
   techs: z
     .array(z.string())
     .min(1, "Adicione pelo menos uma tecnologia.")
@@ -143,17 +144,28 @@ export default function NewProject({ children }: { children: ReactNode }) {
     };
   }, [imagePreviews]);
 
-  async function submitForm({ images, title, description, techs }: FormTypes) {
+  async function submitForm({
+    images,
+    title,
+    description,
+    techs,
+    repo_url,
+  }: FormTypes) {
+    const formData = new FormData();
+    images.forEach((image) => {
+      formData.append("images", image);
+    });
+    formData.append("title", title);
+    formData.append("description", description);
+    formData.append("repo_url", repo_url);
+    techs.forEach((tech) => {
+      formData.append("techs", tech);
+    });
+
     try {
       await fetch("http://localhost:3000/api/projects/create", {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          images,
-          title,
-          description,
-          techs,
-        }),
+        body: formData,
       });
 
       console.log(images, title, description, techs);
@@ -165,7 +177,7 @@ export default function NewProject({ children }: { children: ReactNode }) {
   return (
     <Form {...form}>
       <form
-        className="flex flex-col gap-5"
+        className="mt-4 flex flex-col gap-5"
         onSubmit={form.handleSubmit(submitForm)}
       >
         <FormField
@@ -174,7 +186,7 @@ export default function NewProject({ children }: { children: ReactNode }) {
           render={() => (
             <FormItem>
               <FormLabel className="text-muted-foreground">
-                Capa do projeto:
+                Capa do projeto :
               </FormLabel>
               <FormControl>
                 <div
@@ -259,6 +271,25 @@ export default function NewProject({ children }: { children: ReactNode }) {
                 <Textarea
                   className="min-h-32"
                   placeholder="Insira a descrição do projeto"
+                  {...field}
+                />
+              </FormControl>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+
+        <FormField
+          name="repo_url"
+          control={form.control}
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel className="text-muted-foreground">
+                Link do repositório:
+              </FormLabel>
+              <FormControl>
+                <Input
+                  placeholder="Insira o repositório do projeto"
                   {...field}
                 />
               </FormControl>
