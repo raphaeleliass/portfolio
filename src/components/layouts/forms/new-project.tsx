@@ -73,6 +73,7 @@ export default function NewProject({ children }: { children: ReactNode }) {
       images: [],
       title: "",
       description: "",
+      repo_url: "",
       techs: [],
     },
   });
