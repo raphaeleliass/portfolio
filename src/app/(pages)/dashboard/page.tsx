@@ -11,9 +11,39 @@ import {
 import { DialogClose } from "@radix-ui/react-dialog";
 import { ArrowRight } from "lucide-react";
 
-export default function page() {
+interface Payload {
+  id: string;
+  title: string;
+  description: string;
+  techs: [];
+  url: null;
+  repo_url: string;
+  image_url: [];
+  createdAt: string;
+  updatedAt: string;
+  userId: string;
+}
+[];
+
+export default async function page() {
+  let projects = [];
+  const res = await fetch("http://localhost:3000/api/projects/list", {
+    headers: {
+      "x-Internal-Api-Key": process.env.INTERNAL_API_KEY!,
+    },
+  });
+  const data: Payload[] = await res.json();
+  projects = data;
+  console.log(data);
+
   return (
     <div className="container mx-auto px-4 py-12">
+      {projects.map((proj) => (
+        <p key={proj.id}>
+          {proj.description}
+          {proj.techs.map((item) => item).join(" ")}
+        </p>
+      ))}
       <Dialog>
         <DialogTrigger>
           <DashboardCard

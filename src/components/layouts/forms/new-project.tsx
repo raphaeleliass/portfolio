@@ -168,10 +168,8 @@ export default function NewProject({ children }: { children: ReactNode }) {
         method: "POST",
         body: formData,
       });
-
-      console.log(images, title, description, techs);
     } catch (err) {
-      console.log(err);
+      console.log("Erro:", err);
     }
   }
 
