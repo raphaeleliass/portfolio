@@ -83,6 +83,7 @@ model Project {
   techs       String[]
   url         String?
   repo_url    String
+  image_url   String[]
   createdAt   DateTime @default(now())
   updatedAt   DateTime @default(now()) @updatedAt
 

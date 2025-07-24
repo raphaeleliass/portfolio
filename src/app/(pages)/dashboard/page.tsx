@@ -1,86 +1,44 @@
-import Index from "@/components/layouts/dashboard";
-import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { auth } from "@/lib/auth";
-import { TabsContent } from "@radix-ui/react-tabs";
-import { Edit, Home, PlusCircle, User2 } from "lucide-react";
-import { Metadata } from "next";
-import { headers } from "next/headers";
-import { redirect } from "next/navigation";
+import DashboardCard from "@/components/layouts/cards/dashboardCard";
+import NewProject from "@/components/layouts/forms/new-project";
+import { Button } from "@/components/ui/button";
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogTitle,
+  DialogTrigger,
+} from "@/components/ui/dialog";
+import { DialogClose } from "@radix-ui/react-dialog";
+import { ArrowRight } from "lucide-react";
 
-export const metadata: Metadata = {
-  title: "Dashboard - Portfólio",
-  robots: {
-    follow: false,
-    index: false,
-    googleBot: {
-      index: false,
-      follow: false,
-    },
-  },
-};
-
-const tabItems = [
-  {
-    title: "Inicio",
-    icon: Home,
-    component: <Index />,
-  },
-  {
-    title: "Novo projeto",
-    icon: PlusCircle,
-    component: "house",
-  },
-  {
-    title: "Editar Projeto",
-    icon: Edit,
-    component: "123",
-  },
-  {
-    title: "Perfil",
-    icon: User2,
-    component: "456",
-  },
-];
-
-export default async function page() {
-  const session = await auth.api.getSession({
-    headers: await headers(),
-  });
-
-  if (!session) redirect("/");
-
+export default function page() {
   return (
-    <main className="relative container mx-auto flex h-dvh w-full items-end justify-center py-12">
-      <Tabs defaultValue={tabItems?.[0].title}>
-        <TabsList className="z-50 max-sm:w-56">
-          {tabItems.map((item) => {
-            const Icon = item.icon;
-
-            return (
-              <TabsTrigger
-                value={item.title}
-                key={item.title}
-              >
-                <div className="z-40 flex flex-row items-center gap-1">
-                  <Icon />
-                  <p className="text-xs max-sm:sr-only">{item.title}</p>
-                </div>
-              </TabsTrigger>
-            );
-          })}
-        </TabsList>
-
-        {tabItems.map((component) => (
-          <TabsContent
-            value={component.title}
-            key={component.title}
+    <div className="container mx-auto px-4 py-12">
+      <Dialog>
+        <DialogTrigger>
+          <DashboardCard
+            className="relative flex aspect-square w-56"
+            title={"Novo projeto"}
           >
-            <div className="absolute inset-0 top-0 left-0 z-40 p-5">
-              {component.component}
-            </div>
-          </TabsContent>
-        ))}
-      </Tabs>
-    </main>
+            <ArrowRight
+              className="absolute right-5 bottom-5"
+              size={32}
+            />
+          </DashboardCard>
+        </DialogTrigger>
+
+        <DialogContent className="max-h-[80dvh] overflow-y-auto">
+          <DialogTitle>Adicione um novo projeto</DialogTitle>
+          <DialogDescription className="sr-only">
+            Adicione novos projetos ao portfólio
+          </DialogDescription>
+          <NewProject>
+            <DialogClose asChild>
+              <Button variant={"link"}>Cancelar</Button>
+            </DialogClose>
+          </NewProject>
+        </DialogContent>
+      </Dialog>
+    </div>
   );
 }
