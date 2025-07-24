@@ -1,15 +1,21 @@
+import ProviderWrapper from "@/components/providers/provider-wrapper";
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import { Lora, Plus_Jakarta_Sans, Roboto_Mono } from "next/font/google";
 import "./globals.css";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
-  subsets: ["latin"],
+const plusJakarta = Plus_Jakarta_Sans({
+  subsets: ["latin-ext"],
+  variable: "--font-plus-jakarta",
 });
 
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
+const lora = Lora({
+  subsets: ["latin-ext"],
+  variable: "--font-lora",
+});
+
+const robotoMono = Roboto_Mono({
+  subsets: ["latin-ext"],
+  variable: "--font-roboto-mono",
 });
 
 export const metadata: Metadata = {
@@ -23,11 +29,14 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+    <html
+      lang="pt-BR"
+      suppressHydrationWarning
+    >
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+        className={`${plusJakarta.variable} ${lora.variable} ${robotoMono.variable} antialiased`}
       >
-        {children}
+        <ProviderWrapper>{children}</ProviderWrapper>
       </body>
     </html>
   );
