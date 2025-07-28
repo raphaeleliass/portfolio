@@ -1,74 +1,32 @@
-import DashboardCard from "@/components/layouts/cards/dashboardCard";
-import NewProject from "@/components/layouts/forms/new-project";
-import { Button } from "@/components/ui/button";
-import {
-  Dialog,
-  DialogContent,
-  DialogDescription,
-  DialogTitle,
-  DialogTrigger,
-} from "@/components/ui/dialog";
-import { DialogClose } from "@radix-ui/react-dialog";
-import { ArrowRight } from "lucide-react";
+import AddProject from "@/components/features/dashboard-components/add-project";
+import LastProject from "@/components/features/dashboard-components/last-project";
 
-interface Payload {
-  id: string;
-  title: string;
-  description: string;
-  techs: [];
-  url: null;
-  repo_url: string;
-  image_url: [];
-  createdAt: string;
-  updatedAt: string;
-  userId: string;
-}
-[];
+export default async function Dashboard() {
+  // const data = await FetchProjects();
 
-export default async function page() {
-  let projects = [];
-  const res = await fetch("http://localhost:3000/api/projects/list", {
-    headers: {
-      "x-Internal-Api-Key": process.env.INTERNAL_API_KEY!,
-    },
-  });
-  const data: Payload[] = await res.json();
-  projects = data;
-  console.log(data);
+  const data = [
+    { createdAt: "2025-07-26T17:05:36.892+00:00" },
+    { createdAt: "2025-07-26T17:05:36.892+00:00" },
+    { createdAt: "2025-07-26T17:05:36.892+00:00" },
+    { createdAt: "2025-07-26T17:05:36.892+00:00" },
+  ];
+
+  console.log(data?.length);
 
   return (
-    <div className="container mx-auto px-4 py-12">
-      {projects.map((proj) => (
-        <p key={proj.id}>
-          {proj.description}
-          {proj.techs.map((item) => item).join(" ")}
-        </p>
-      ))}
-      <Dialog>
-        <DialogTrigger>
-          <DashboardCard
-            className="relative flex aspect-square w-56"
-            title={"Novo projeto"}
-          >
-            <ArrowRight
-              className="absolute right-5 bottom-5"
-              size={32}
-            />
-          </DashboardCard>
-        </DialogTrigger>
+    <section className="mx-auto h-dvh w-full px-2 py-5 md:max-w-4xl md:px-7">
+      <article className="grid h-3/4 grid-cols-4 grid-rows-4 gap-4">
+        <AddProject />
 
-        <DialogContent className="max-h-[80dvh] overflow-y-auto">
-          <DialogTitle>Adicione um novo projeto</DialogTitle>
-          <DialogDescription className="sr-only">
-            Adicione novos projetos ao portfólio
-          </DialogDescription>
-          <NewProject>
-            <DialogClose asChild>
-              <Button variant={"link"}>Cancelar</Button>
-            </DialogClose>
-          </NewProject>
-        </DialogContent>
-      </Dialog>
-    </div>
+        <LastProject
+          className="col-span-4 row-span-2 h-full"
+          projectsCount={data?.length}
+          createdAt={data?.[0].createdAt as string}
+        />
+
+        <div className="col-span-3 row-span-1 bg-blue-400" />
+        <div className="col-span-2 row-span-1 bg-blue-400" />
+      </article>
+    </section>
   );
 }
