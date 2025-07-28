@@ -1,4 +1,4 @@
-import Signin from "@/components/layouts/forms/signin";
+import Signin from "@/components/features/auth/components/signin";
 import { auth } from "@/lib/auth";
 import { ArrowRight } from "lucide-react";
 import { headers } from "next/headers";
