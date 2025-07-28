@@ -14,7 +14,7 @@ export default function ProviderWrapper({
         disableTransitionOnChange
       >
         {children}
-        <Toaster/>
+        <Toaster />
       </ThemeProvider>
     </>
   );
