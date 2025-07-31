@@ -29,7 +29,7 @@ export default function LastProject({
 
   const lastProjectAdded = date.toLocaleString("pt-BR", {
     timeZone: "America/Sao_Paulo",
-    dateStyle:"short"
+    dateStyle: "short",
   });
 
   const chartData = [
@@ -48,15 +48,15 @@ export default function LastProject({
   return (
     <Card
       className={clsx(
-        "flex flex-col items-center justify-center py-0 md:flex-row",
+        "flex h-full flex-col items-center justify-center",
         className,
       )}
       ref={ref}
     >
-      <CardContent className="w-full max-sm:h-1/2">
+      <CardContent className="w-full">
         <ChartContainer
           config={chartConfig}
-          className="mx-auto aspect-square max-h-[250px] w-full max-sm:h-full"
+          className="mx-auto w-full"
         >
           <RadialBarChart
             data={chartData}
@@ -116,9 +116,11 @@ export default function LastProject({
         </ChartContainer>
       </CardContent>
 
-      <CardFooter className="flex flex-col text-center md:w-2/3">
-        <p className="w-full font-bold text-base">Último projeto adicionado</p>
-        <p className="text-muted-foreground mt-1 font-bold text-base">{lastProjectAdded}</p>
+      <CardFooter className="flex flex-col text-center">
+        <p className="w-full text-base font-bold">Último projeto adicionado</p>
+        <p className="text-muted-foreground mt-1 text-base font-bold">
+          {lastProjectAdded}
+        </p>
       </CardFooter>
     </Card>
   );

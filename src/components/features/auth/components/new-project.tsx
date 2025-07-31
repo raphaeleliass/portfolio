@@ -93,64 +93,68 @@ export default function NewProject({ children }: { children: ReactNode }) {
       <form
         className="relative mt-4 flex flex-col gap-5"
         onSubmit={form.handleSubmit(submitForm)}
-        aria-disabled={isSubmitting}
       >
-        <FormField
-          name="images"
-          control={form.control}
-          render={() => <ImageUploader form={form} />}
-        />
+        <fieldset
+          disabled={isSubmitting}
+          className="flex flex-col gap-5"
+        >
+          <FormField
+            name="images"
+            control={form.control}
+            render={() => <ImageUploader form={form} />}
+          />
 
-        <FormField
-          name="title"
-          control={form.control}
-          render={({ field }) => (
-            <ProjectFormInput
-              disabled={isSubmitting}
-              field={field}
-              label="Título:"
-              placeholder="Insira o título do projeto"
-            />
-          )}
-        />
+          <FormField
+            name="title"
+            control={form.control}
+            render={({ field }) => (
+              <ProjectFormInput
+                disabled={isSubmitting}
+                field={field}
+                label="Título:"
+                placeholder="Insira o título do projeto"
+              />
+            )}
+          />
 
-        <FormField
-          name="description"
-          control={form.control}
-          render={({ field }) => (
-            <ProjectFormInput
-              disabled={isSubmitting}
-              field={field}
-              label="Descrição:"
-              placeholder="Insira a descrição do projeto"
-              type="textarea"
-            />
-          )}
-        />
+          <FormField
+            name="description"
+            control={form.control}
+            render={({ field }) => (
+              <ProjectFormInput
+                disabled={isSubmitting}
+                field={field}
+                label="Descrição:"
+                placeholder="Insira a descrição do projeto"
+                type="textarea"
+              />
+            )}
+          />
 
-        <FormField
-          name="repo_url"
-          control={form.control}
-          render={({ field }) => (
-            <ProjectFormInput
-              disabled={isSubmitting}
-              field={field}
-              label="Link do repositório:"
-              placeholder="Insira o repositório do projeto"
-            />
-          )}
-        />
+          <FormField
+            name="repo_url"
+            control={form.control}
+            render={({ field }) => (
+              <ProjectFormInput
+                disabled={isSubmitting}
+                field={field}
+                label="Link do repositório:"
+                placeholder="Insira o repositório do projeto"
+              />
+            )}
+          />
 
-        <FormField
-          name="techs"
-          control={form.control}
-          render={() => (
-            <TechInput
-              disabled={isSubmitting}
-              form={form}
-            />
-          )}
-        />
+          <FormField
+            name="techs"
+            control={form.control}
+            render={() => (
+              <TechInput
+                disabled={isSubmitting}
+                form={form}
+              />
+            )}
+          />
+        </fieldset>
 
         <div className="flex flex-row items-center justify-end">
           {children}

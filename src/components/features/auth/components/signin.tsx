@@ -41,22 +41,26 @@ export default function Signin() {
   const { isSubmitting } = useFormState({ control: form.control });
 
   async function submitForm({ email, password }: FormTypes) {
-    await authClient.signIn.email(
-      {
-        email,
-        password,
-      },
-      {
-        onSuccess: () => {
-          router.push("/dashboard");
-          form.reset();
+    try {
+      await authClient.signIn.email(
+        {
+          email,
+          password,
         },
+        {
+          onSuccess: () => {
+            router.push("/dashboard");
+            form.reset();
+          },
 
-        onError: (ctx) => {
-          toast.error(ctx.error.message);
+          onError: (ctx) => {
+            toast.error(ctx.error.message);
+          },
         },
-      },
-    );
+      );
+    } catch {
+      toast.error("Ocorreu um erro inesperado. Tente novamente.");
+    }
   }
 
   return (
