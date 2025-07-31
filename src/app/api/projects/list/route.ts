@@ -4,9 +4,10 @@ import { NextResponse } from "next/server";
 
 export async function GET(req: Request) {
   const providedApiKey = req.headers.get("x-internal-api-key");
+  const expectedApiKey = appApiKey;
 
-  if (!providedApiKey || providedApiKey !== appApiKey) {
-    return new NextResponse("Unauthorized", { status: 401 });
+  if (!providedApiKey || providedApiKey !== expectedApiKey) {
+    return NextResponse.json({expectedApiKey, providedApiKey})
   }
   const posts = await prisma.project.findMany({
     where: {

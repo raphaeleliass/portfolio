@@ -10,4 +10,3 @@ export interface ProjectTypes {
   updatedAt: string;
   userId: string;
 }
-[];

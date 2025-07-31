@@ -1,11 +1,17 @@
+"use server";
+
 import { appApiKey, appBaseUrl } from "@/constants";
 import { ProjectTypes } from "@/types";
 
 export async function FetchProjects() {
+  const apiKey = appApiKey;
+
+  if (!apiKey) throw new Error(`Missing API Key!`);
+
   try {
     const response = await fetch(`${appBaseUrl}/api/projects/list`, {
       headers: {
-        "x-internal-api-key": appApiKey!,
+        "x-internal-api-key": apiKey!,
       },
       next: {
         revalidate: 15,
@@ -16,7 +22,7 @@ export async function FetchProjects() {
     const data: ProjectTypes[] = await response.json();
 
     return data;
-  } catch (err) {
-    console.log("Error:", err);
+  } catch {
+    throw new Error("Error fetching projects");
   }
 }
