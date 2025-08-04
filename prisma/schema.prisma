@@ -84,6 +84,7 @@ model Project {
   url         String?
   repo_url    String
   image_url   String[]
+  published   Boolean  @default(false)
   createdAt   DateTime @default(now())
   updatedAt   DateTime @default(now()) @updatedAt
 
