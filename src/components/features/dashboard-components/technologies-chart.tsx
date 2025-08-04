@@ -13,7 +13,13 @@ import {
   ChartTooltipContent,
 } from "@/components/ui/chart";
 import { ProjectTypes } from "@/types";
-import { Bar, BarChart, XAxis, YAxis } from "recharts";
+import {
+  PolarAngleAxis,
+  PolarGrid,
+  Radar,
+  RadarChart,
+  ResponsiveContainer,
+} from "recharts";
 
 interface TechData {
   name: string;
@@ -37,7 +43,7 @@ export function TechnologiesChart({ projects }: TechnologiesChartProps) {
 
   const sortedTechs = Object.keys(techCounts)
     .sort((a, b) => techCounts[b] - techCounts[a])
-    .slice(0, 3);
+    .slice(0, 5);
 
   const chartData: TechData[] = sortedTechs.map((tech) => ({
     name: tech,
@@ -45,53 +51,37 @@ export function TechnologiesChart({ projects }: TechnologiesChartProps) {
   }));
 
   return (
-    <Card className="h-full">
+    <Card className="h-full shadow-none">
       <CardHeader>
         <CardTitle className="text-2xl">Tecnologias</CardTitle>
-        <CardDescription>Top 3 mais usadas nos projetos</CardDescription>
+        <CardDescription>Top 5 mais usadas nos projetos</CardDescription>
       </CardHeader>
-      <CardContent>
+      <CardContent className="p-4">
         <ChartContainer
           config={{}}
-          className=" w-full"
+          className="h-full w-full"
         >
-          <BarChart
-            className="capitalize"
-            accessibilityLayer
-            layout="vertical"
-            data={chartData}
-            margin={{
-              left: 10,
-              right: 40,
-              top: 10,
-              bottom: 10,
-            }}
+          <ResponsiveContainer
+            width="100%"
+            height="100%"
           >
-            <YAxis
-              dataKey="name"
-              type="category"
-              tickLine={false}
-              axisLine={false}
-              tickMargin={20}
-              width={60}
-            />
-            <XAxis
-              dataKey="total"
-              type="number"
-              hide
-            />
-            <ChartTooltip
-              cursor={true}
-              content={<ChartTooltipContent hideLabel />}
-            />
-
-            <Bar
-              dataKey="total"
-              radius={4}
-              fill="var(--primary)"
-              barSize={16}
-            />
-          </BarChart>
+            <RadarChart
+              className="capitalize"
+              data={chartData}
+            >
+              <ChartTooltip
+                cursor={true}
+                content={<ChartTooltipContent hideLabel />}
+              />
+              <PolarGrid />
+              <PolarAngleAxis dataKey="name" />
+              <Radar
+                dataKey="total"
+                fill="var(--primary)"
+                fillOpacity={0.5}
+              />
+            </RadarChart>
+          </ResponsiveContainer>
         </ChartContainer>
       </CardContent>
     </Card>

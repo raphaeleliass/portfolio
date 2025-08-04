@@ -8,7 +8,6 @@ import {
   DialogTrigger,
 } from "@/components/ui/dialog";
 import clsx from "clsx";
-import { Plus } from "lucide-react";
 import { HTMLAttributes, Ref } from "react";
 import NewProject from "../auth/components/new-project";
 
@@ -24,18 +23,17 @@ export default function AddProject({ className, ref, ...props }: CardProps) {
         <Button
           role="button"
           className={clsx(
-            "fixed right-3 bottom-3 p-3 drop-shadow-2xl",
+            "fixed right-3 bottom-3 p-3 drop-shadow-2xl z-50",
             className,
           )}
           ref={ref}
           {...props}
         >
-          <Plus />
-          <p className="max-sm:sr-only">Novo Projeto</p>
+          <p className="">Adicionar projeto</p>
         </Button>
       </DialogTrigger>
 
-      <DialogContent className="max-h-[80dvh] overflow-y-scroll">
+      <DialogContent className="max-h-[80dvh] overflow-y-scroll md:max-w-2xl">
         <DialogTitle>Adicionar um novo projeto</DialogTitle>
         <DialogDescription className="sr-only">
           Preencha os campos e adicione seu projeto mais recente
