@@ -1,7 +1,14 @@
 "use client";
 
 import { Button } from "@/components/ui/button";
-import { Form, FormField } from "@/components/ui/form";
+import { Checkbox } from "@/components/ui/checkbox";
+import {
+  Form,
+  FormControl,
+  FormField,
+  FormItem,
+  FormLabel,
+} from "@/components/ui/form";
 import { appBaseUrl } from "@/constants";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Loader2 } from "lucide-react";
@@ -9,9 +16,9 @@ import { ReactNode } from "react";
 import { useForm, useFormState } from "react-hook-form";
 import { toast } from "sonner";
 import { z } from "zod";
-import { ImageUploader } from "./new-project-form/image-uploader";
-import { ProjectFormInput } from "./new-project-form/project-form-input";
-import { TechInput } from "./new-project-form/tech-input";
+import { ImageUploader } from "./form/image-uploader";
+import { ProjectFormInput } from "./form/project-form-input";
+import { TechInput } from "./form/tech-input";
 
 const MAX_FILE_SIZE = 5 * 1024 * 1024;
 const ACCEPTED_IMAGE_TYPES = [
@@ -45,6 +52,7 @@ const formSchema = z.object({
     .array(z.string())
     .min(1, "Adicione pelo menos uma tecnologia.")
     .max(10, "Você pode adicionar no máximo 10 tecnologias."),
+  published: z.boolean(),
 });
 
 export type FormTypes = z.infer<typeof formSchema>;
@@ -58,6 +66,7 @@ export default function NewProject({ children }: { children: ReactNode }) {
       description: "",
       repo_url: "",
       techs: [],
+      published: false,
     },
   });
 
@@ -74,6 +83,7 @@ export default function NewProject({ children }: { children: ReactNode }) {
     data.techs.forEach((tech) => {
       formData.append("techs", tech);
     });
+    formData.append("published", String(data.published));
 
     try {
       await fetch(`${appBaseUrl}/api/projects/create`, {
@@ -147,11 +157,29 @@ export default function NewProject({ children }: { children: ReactNode }) {
           <FormField
             name="techs"
             control={form.control}
-            render={() => (
+            render={({ field }) => (
               <TechInput
                 disabled={isSubmitting}
-                form={form}
+                {...field}
               />
+            )}
+          />
+
+          <FormField
+            control={form.control}
+            name="published"
+            render={({ field }) => (
+              <FormItem className="flex flex-row items-start space-y-0 space-x-3 rounded-md border p-4">
+                <FormControl>
+                  <Checkbox
+                    checked={field.value}
+                    onCheckedChange={field.onChange}
+                  />
+                </FormControl>
+                <div className="space-y-1 leading-none">
+                  <FormLabel>Projeto privado?</FormLabel>
+                </div>
+              </FormItem>
             )}
           />
         </fieldset>

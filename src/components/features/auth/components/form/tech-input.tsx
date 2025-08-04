@@ -8,15 +8,14 @@ import {
 import { Input } from "@/components/ui/input";
 import { X } from "lucide-react";
 import { KeyboardEvent, useRef } from "react";
-import { UseFormReturn } from "react-hook-form";
-import { FormTypes } from "../new-project";
+import { useFormContext } from "react-hook-form";
 
 interface TechInputProps {
-  form: UseFormReturn<FormTypes>;
   disabled: boolean;
 }
 
-export function TechInput({ form,disabled }: TechInputProps) {
+export function TechInput({ disabled }: TechInputProps) {
+  const { getValues, setValue, watch } = useFormContext();
   const techInputRef = useRef<HTMLInputElement>(null);
 
   const handleTechKeyDown = (e: KeyboardEvent<HTMLInputElement>) => {
@@ -24,9 +23,9 @@ export function TechInput({ form,disabled }: TechInputProps) {
       e.preventDefault();
       const techValue = e.currentTarget.value.trim();
       if (techValue) {
-        const currentTechs = form.getValues("techs");
+        const currentTechs = getValues("techs");
         if (!currentTechs.includes(techValue)) {
-          form.setValue("techs", [...currentTechs, techValue], {
+          setValue("techs", [...currentTechs, techValue], {
             shouldValidate: true,
           });
           e.currentTarget.value = "";
@@ -36,10 +35,10 @@ export function TechInput({ form,disabled }: TechInputProps) {
   };
 
   const removeTech = (techToRemove: string) => {
-    const currentTechs = form.getValues("techs");
-    form.setValue(
+    const currentTechs = getValues("techs");
+    setValue(
       "techs",
-      currentTechs.filter((tech) => tech !== techToRemove),
+      currentTechs.filter((tech: string) => tech !== techToRemove),
       { shouldValidate: true },
     );
   };
@@ -50,14 +49,14 @@ export function TechInput({ form,disabled }: TechInputProps) {
       <FormControl>
         <div
           className={`flex flex-col ${
-            form.getValues("techs").length > 0 && "gap-4"
+            getValues("techs").length > 0 && "gap-4"
           }`}
         >
           <div
             className="flex flex-row flex-wrap gap-1"
             onClick={() => techInputRef.current?.focus()}
           >
-            {form.watch("techs").map((tech) => (
+            {watch("techs").map((tech: string) => (
               <Badge
                 key={tech}
                 variant="secondary"
