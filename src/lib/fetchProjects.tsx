@@ -3,7 +3,7 @@
 import { appApiKey, appBaseUrl } from "@/constants";
 import { ProjectTypes } from "@/types";
 
-export async function FetchProjects() {
+export async function fetchProjects() {
   const apiKey = appApiKey;
 
   if (!apiKey) throw new Error(`Missing API Key!`);
