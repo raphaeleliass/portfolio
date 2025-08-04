@@ -1,9 +1,9 @@
 import { Button } from "@/components/ui/button";
-import { FetchProjects } from "@/lib/fetchProjects";
+import { fetchProjects } from "@/lib/fetchProjects";
 import Link from "next/link";
 
 export default async function Home() {
-  const data = await FetchProjects();
+  const data = await fetchProjects();
 
   return (
     <div>
