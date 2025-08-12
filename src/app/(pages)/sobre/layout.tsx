@@ -1,6 +1,6 @@
 import { ReactNode } from "react";
 
-export const metadate = {
+export const metadata = {
   title: "Sobre Raphael Elias",
   description:"Saiba mais sobre mim e o caminho que estou trilhando."
 };
