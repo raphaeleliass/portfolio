@@ -1,4 +1,5 @@
 import ProviderWrapper from "@/components/providers/provider-wrapper";
+import { Analytics } from "@vercel/analytics/next";
 import type { Metadata } from "next";
 import { Lora, Plus_Jakarta_Sans, Roboto_Mono } from "next/font/google";
 import "./globals.css";
@@ -37,7 +38,10 @@ export default function RootLayout({
       <body
         className={`${plusJakarta.variable} ${lora.variable} ${robotoMono.variable} antialiased`}
       >
-        <ProviderWrapper>{children}</ProviderWrapper>
+        <ProviderWrapper>
+          {children}
+          <Analytics />
+        </ProviderWrapper>
       </body>
     </html>
   );
