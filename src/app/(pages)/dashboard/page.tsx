@@ -1,7 +1,10 @@
 import AddProject from "@/components/features/dashboard-components/add-project";
 import CarouselDashboard from "@/components/features/dashboard-components/carousel-dashboard";
 import { ProjectsDataTable } from "@/components/features/dashboard-components/projects-data-table";
+import { Button } from "@/components/ui/button";
 import { fetchProjects } from "@/lib/fetchProjects";
+import { ArrowLeft } from "lucide-react";
+import Link from "next/link";
 
 export default async function Dashboard() {
   const data = await fetchProjects();
@@ -22,6 +25,12 @@ export default async function Dashboard() {
 
   return (
     <section className="container mx-auto min-h-dvh w-full justify-items-center px-2 py-5 md:px-7">
+      <Link href={"/"}>
+        <Button variant={"secondary"}>
+          <ArrowLeft />
+          Início
+        </Button>
+      </Link>
       <article className="flex w-full max-w-4xl flex-col gap-2 max-sm:h-[dvh] md:flex-row">
         <AddProject />
         <CarouselDashboard data={data} />
