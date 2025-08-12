@@ -89,8 +89,40 @@ export default function Projects({
         <div className="max-sm:mt-6 md:w-1/2 md:pl-3">
           <h2 className="text-3xl font-bold">{currentProject.title}</h2>
 
+          <div>
+            <a
+              href={currentProject.repo_url}
+              target="_blank"
+              rel="noreferrer noopener"
+            >
+              <Button
+                className="px-0"
+                variant={"link"}
+                size={"sm"}
+              >
+                repositório
+              </Button>
+            </a>
+
+            {currentProject.url && (
+              <a
+                href={currentProject.url}
+                target="_blank"
+                rel="noreferrer noopener"
+              >
+                <Button
+                  className="px-0"
+                  variant={"link"}
+                  size={"sm"}
+                >
+                  site
+                </Button>
+              </a>
+            )}
+          </div>
+
           <div className="mt-2 max-sm:mb-12">
-            <p className="text-pretty text-sm">{currentProject.description}</p>
+            <p className="text-sm text-pretty">{currentProject.description}</p>
           </div>
         </div>
       </div>
