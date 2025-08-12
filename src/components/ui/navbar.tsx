@@ -9,7 +9,7 @@ export default async function Navbar() {
   });
 
   return (
-    <header className="bg-background border-b-muted-foreground sticky top-0 mx-auto flex min-h-[10dvh] w-full items-center justify-center border-b lg:max-w-7xl">
+    <header className="bg-background border-b-muted-foreground sticky top-0 z-50 mx-auto flex min-h-[10dvh] w-full items-center justify-center border-b lg:max-w-7xl">
       <div className="flex w-full flex-row items-center justify-between">
         <Link
           href={"/"}
@@ -18,7 +18,7 @@ export default async function Navbar() {
           Raphael Elias
         </Link>
         <nav className="flex flex-row">
-          <Link href={"/about"}>
+          <Link href={"/sobre"}>
             <Button
               variant={"link"}
               className="text-foreground"
