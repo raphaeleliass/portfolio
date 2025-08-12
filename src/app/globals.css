@@ -175,3 +175,9 @@
     @apply bg-background text-foreground px-2 md:px-8;
   }
 }
+
+@layer utilities {
+  .section-view {
+    @apply mx-auto flex h-[89dvh] flex-col md:flex-row lg:max-w-7xl;
+  }
+}
