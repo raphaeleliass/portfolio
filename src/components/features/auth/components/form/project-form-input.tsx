@@ -1,49 +1,57 @@
 import {
   FormControl,
+  FormField,
   FormItem,
   FormLabel,
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
-import { ControllerRenderProps, FieldValues, Path } from "react-hook-form";
+import { Control, FieldValues, Path } from "react-hook-form";
 
 interface ProjectFormInputProps<T extends FieldValues> {
-  field: ControllerRenderProps<T, Path<T>>;
+  control: Control<T>;
+  name: Path<T>;
   label: string;
   placeholder: string;
-  type?: "text" | "textarea";
+  isTextArea?: boolean;
   disabled?: boolean;
 }
 
 export function ProjectFormInput<T extends FieldValues>({
-  field,
+  control,
+  name,
   label,
   placeholder,
-  type = "text",
+  isTextArea,
   disabled,
 }: ProjectFormInputProps<T>) {
   return (
-    <FormItem>
-      <FormLabel className="text-muted-foreground">{label}</FormLabel>
-      <FormControl>
-        {type === "textarea" ? (
-          <Textarea
-            disabled={disabled}
-            className="min-h-32"
-            placeholder={placeholder}
-            {...field}
-          />
-        ) : (
-          <Input
-            disabled={disabled}
-            placeholder={placeholder}
-            type={type}
-            {...field}
-          />
-        )}
-      </FormControl>
-      <FormMessage />
-    </FormItem>
+    <FormField
+      control={control}
+      name={name}
+      render={({ field }) => (
+        <FormItem>
+          <FormLabel className="text-muted-foreground">{label}</FormLabel>
+          <FormControl>
+            {isTextArea ? (
+              <Textarea
+                disabled={disabled}
+                className="min-h-32"
+                placeholder={placeholder}
+                {...field}
+              />
+            ) : (
+              <Input
+                disabled={disabled}
+                placeholder={placeholder}
+                {...field}
+              />
+            )}
+          </FormControl>
+          <FormMessage />
+        </FormItem>
+      )}
+    />
   );
 }

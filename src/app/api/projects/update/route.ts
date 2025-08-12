@@ -1,5 +1,5 @@
-export async function UPDATE(req: Request){
+export async function PATCH(req: Request){
   const {} = await req.json()
 
-  
+
 }

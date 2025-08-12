@@ -1,43 +1,61 @@
 import { Button } from "@/components/ui/button";
-import { FormControl, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
+import {
+  FormControl,
+  FormItem,
+  FormLabel,
+  FormMessage,
+} from "@/components/ui/form";
 import { UploadCloud, X } from "lucide-react";
 import Image from "next/image";
 import { useCallback, useEffect, useState } from "react";
 import { useDropzone } from "react-dropzone";
-import { UseFormReturn } from "react-hook-form";
-import { FormTypes } from "../new-project";
+import { Control, FieldValues, Path, useController } from "react-hook-form";
 
-interface ImageUploaderProps {
-  form: UseFormReturn<FormTypes>;
+interface ImageUploaderProps<T extends FieldValues> {
+  control: Control<T>;
+  name: Path<T>;
+  existingImages?: string[];
+  setExistingImages?: (urls: string[]) => void;
 }
 
-export function ImageUploader({ form }: ImageUploaderProps) {
+export function ImageUploader<T extends FieldValues>({
+  control,
+  name,
+  existingImages = [],
+  setExistingImages,
+}: ImageUploaderProps<T>) {
+  const { field, fieldState } = useController({ control, name });
   const [imagePreviews, setImagePreviews] = useState<string[]>([]);
 
   const onDrop = useCallback(
     (acceptedFiles: File[]) => {
-      const currentFiles = form.getValues("images");
-      const newFiles = [...currentFiles, ...acceptedFiles];
-      form.setValue("images", newFiles, { shouldValidate: true });
+      const newFiles = [...(field.value || []), ...acceptedFiles];
+      field.onChange(newFiles);
 
       const newPreviews = acceptedFiles.map((file) =>
         URL.createObjectURL(file),
       );
       setImagePreviews((prevPreviews) => [...prevPreviews, ...newPreviews]);
     },
-    [form],
+    [field],
   );
 
-  const removeImage = (indexToRemove: number) => {
+  const removeNewImage = (indexToRemove: number) => {
     URL.revokeObjectURL(imagePreviews[indexToRemove]);
-
     setImagePreviews((prevPreviews) =>
       prevPreviews.filter((_, index) => index !== indexToRemove),
     );
 
-    const currentFiles = form.getValues("images");
-    const newFiles = currentFiles.filter((_, index) => index !== indexToRemove);
-    form.setValue("images", newFiles, { shouldValidate: true });
+    const newFiles = field.value.filter(
+      (_file: File, index: number) => index !== indexToRemove,
+    );
+    field.onChange(newFiles);
+  };
+
+  const removeExistingImage = (urlToRemove: string) => {
+    if (setExistingImages) {
+      setExistingImages(existingImages.filter((url) => url !== urlToRemove));
+    }
   };
 
   const { getRootProps, getInputProps, isDragActive } = useDropzone({
@@ -80,11 +98,32 @@ export function ImageUploader({ form }: ImageUploaderProps) {
           </div>
         </div>
       </FormControl>
-      <FormMessage />
-      {imagePreviews.length > 0 && (
+      <FormMessage>{fieldState.error?.message}</FormMessage>
+      {(existingImages.length > 0 || imagePreviews.length > 0) && (
         <div className="mt-4 grid grid-cols-3 gap-4 sm:grid-cols-4 md:grid-cols-5 lg:grid-cols-6">
+          {existingImages.map((src) => (
+            <div key={src} className="relative aspect-square">
+              <Image
+                src={src}
+                alt="Imagem existente"
+                fill
+                className="rounded-md object-cover"
+              />
+              {setExistingImages && (
+                <Button
+                  type="button"
+                  variant="destructive"
+                  size="icon"
+                  className="absolute top-1 right-1 h-6 w-6 rounded-full"
+                  onClick={() => removeExistingImage(src)}
+                >
+                  <X className="h-4 w-4" />
+                </Button>
+              )}
+            </div>
+          ))}
           {imagePreviews.map((src, index) => (
-            <div key={index} className="relative aspect-square">
+            <div key={src} className="relative aspect-square">
               <Image
                 src={src}
                 alt={`Preview da imagem ${index + 1}`}
@@ -96,7 +135,7 @@ export function ImageUploader({ form }: ImageUploaderProps) {
                 variant="destructive"
                 size="icon"
                 className="absolute top-1 right-1 h-6 w-6 rounded-full"
-                onClick={() => removeImage(index)}
+                onClick={() => removeNewImage(index)}
               >
                 <X className="h-4 w-4" />
               </Button>

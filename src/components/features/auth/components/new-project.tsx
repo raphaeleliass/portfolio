@@ -108,50 +108,34 @@ export default function NewProject({ children }: { children: ReactNode }) {
           disabled={isSubmitting}
           className="flex flex-col gap-5"
         >
-          <FormField
+          <ImageUploader
             name="images"
             control={form.control}
-            render={() => <ImageUploader form={form} />}
           />
 
-          <FormField
+          <ProjectFormInput
             name="title"
             control={form.control}
-            render={({ field }) => (
-              <ProjectFormInput
-                disabled={isSubmitting}
-                field={field}
-                label="Título:"
-                placeholder="Insira o título do projeto"
-              />
-            )}
+            disabled={isSubmitting}
+            label="Título:"
+            placeholder="Insira o título do projeto"
           />
 
-          <FormField
+          <ProjectFormInput
             name="description"
             control={form.control}
-            render={({ field }) => (
-              <ProjectFormInput
-                disabled={isSubmitting}
-                field={field}
-                label="Descrição:"
-                placeholder="Insira a descrição do projeto"
-                type="textarea"
-              />
-            )}
+            disabled={isSubmitting}
+            label="Descrição:"
+            placeholder="Insira a descrição do projeto"
+            isTextArea={true}
           />
 
-          <FormField
+          <ProjectFormInput
             name="repo_url"
             control={form.control}
-            render={({ field }) => (
-              <ProjectFormInput
-                disabled={isSubmitting}
-                field={field}
-                label="Link do repositório:"
-                placeholder="Insira o repositório do projeto"
-              />
-            )}
+            disabled={isSubmitting}
+            label="Link do repositório:"
+            placeholder="Insira o repositório do projeto"
           />
 
           <FormField

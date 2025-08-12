@@ -1,37 +1,37 @@
-"use client";
+'use client';
 
-import { zodResolver } from "@hookform/resolvers/zod";
-import { useRouter } from "next/navigation";
-import { ReactNode, useState } from "react";
-import { useForm } from "react-hook-form";
-import { toast } from "sonner";
-import { z } from "zod";
+import { zodResolver } from '@hookform/resolvers/zod';
+import { useRouter } from 'next/navigation';
+import { ReactNode, useState } from 'react';
+import { useForm } from 'react-hook-form';
+import { toast } from 'sonner';
+import { z } from 'zod';
 
-import { Button } from "@/components/ui/button";
-import { Form } from "@/components/ui/form";
-import { ProjectTypes } from "@/types";
-import { ImageUploader } from "./form/image-uploader";
-import { ProjectFormInput } from "./form/project-form-input";
-import { TechInput } from "./form/tech-input";
+import { Button } from '@/components/ui/button';
+import { Form } from '@/components/ui/form';
+import { ProjectTypes } from '@/types';
+import { ImageUploader } from './form/image-uploader';
+import { ProjectFormInput } from './form/project-form-input';
+import { TechInput } from './form/tech-input';
 
 const MAX_FILE_SIZE = 5 * 1024 * 1024;
 const ACCEPTED_IMAGE_TYPES = [
-  "image/jpeg",
-  "image/jpg",
-  "image/png",
-  "image/webp",
+  'image/jpeg',
+  'image/jpg',
+  'image/png',
+  'image/webp',
 ];
 
 const projectSchema = z.object({
-  title: z.string().min(3, "O título deve ter ao menos 3 caracteres"),
+  title: z.string().min(3, 'O título deve ter ao menos 3 caracteres'),
   description: z
     .string()
-    .min(15, "A descrição deve ter no mínimo 15 caracteres"),
+    .min(15, 'A descrição deve ter no mínimo 15 caracteres'),
   techs: z
     .array(z.string())
-    .min(1, "Adicione pelo menos uma tecnologia.")
-    .max(10, "Você pode adicionar no máximo 10 tecnologias."),
-  repo_url: z.url("URL inválida"),
+    .min(1, 'Adicione pelo menos uma tecnologia.')
+    .max(10, 'Você pode adicionar no máximo 10 tecnologias.'),
+  repo_url: z.url('URL inválida'),
   images: z
     .array(z.instanceof(File))
     .optional()
@@ -43,7 +43,7 @@ const projectSchema = z.object({
       (files) =>
         !files ||
         files.every((file) => ACCEPTED_IMAGE_TYPES.includes(file.type)),
-      "Apenas os formatos .jpg, .jpeg, .png e .webp são aceitos.",
+      'Apenas os formatos .jpg, .jpeg, .png e .webp são aceitos.',
     ),
   existingImages: z.array(z.string()).optional(),
 });
@@ -56,8 +56,9 @@ interface EditProjectProps {
 }
 
 export default function EditProject({ children, project }: EditProjectProps) {
-  const [techs, setTechs] = useState<string[]>(project.techs);
-  const [existingImages, setExistingImages] = useState<string[]>(project.image_url as unknown as string[]);
+  const [existingImages, setExistingImages] = useState<string[]>(
+    project.image_url as unknown as string[],
+  );
   const router = useRouter();
 
   const form = useForm<ProjectFormValues>({
@@ -76,29 +77,29 @@ export default function EditProject({ children, project }: EditProjectProps) {
   const onSubmit = async (data: ProjectFormValues) => {
     try {
       const formData = new FormData();
-      formData.append("id", project.id);
-      formData.append("title", data.title);
-      formData.append("description", data.description);
-      formData.append("repo_url", data.repo_url);
-      techs.forEach((tech) => formData.append("techs", tech));
+      formData.append('id', project.id);
+      formData.append('title', data.title);
+      formData.append('description', data.description);
+      formData.append('repo_url', data.repo_url);
+      data.techs.forEach((tech) => formData.append('techs', tech));
       if (data.images) {
-        data.images.forEach((image) => formData.append("images", image));
+        data.images.forEach((image) => formData.append('images', image));
       }
-      formData.append("existingImages", JSON.stringify(existingImages));
+      formData.append('existingImages', JSON.stringify(existingImages));
 
-      const response = await fetch("/api/projects/edit", {
-        method: "PUT",
+      const response = await fetch('/api/projects/edit', {
+        method: 'PUT',
         body: formData,
       });
 
       if (response.ok) {
-        toast.success("Projeto atualizado com sucesso!");
+        toast.success('Projeto atualizado com sucesso!');
         router.refresh();
       } else {
-        toast.error("Falha ao atualizar o projeto.");
+        toast.error('Falha ao atualizar o projeto.');
       }
     } catch {
-      toast.error("Ocorreu um erro ao enviar o formulário.");
+      toast.error('Ocorreu um erro ao enviar o formulário.');
     }
   };
 
@@ -118,7 +119,7 @@ export default function EditProject({ children, project }: EditProjectProps) {
           control={form.control}
           isTextArea
         />
-        <TechInput techs={techs} setTechs={setTechs} />
+        <TechInput disabled={isSubmitting} />
         <ProjectFormInput
           name="repo_url"
           label="URL do Repositório"
@@ -126,6 +127,7 @@ export default function EditProject({ children, project }: EditProjectProps) {
           control={form.control}
         />
         <ImageUploader
+          name="images"
           control={form.control}
           existingImages={existingImages}
           setExistingImages={setExistingImages}
@@ -133,7 +135,7 @@ export default function EditProject({ children, project }: EditProjectProps) {
         <div className="flex justify-end gap-2">
           {children}
           <Button type="submit" disabled={isSubmitting}>
-            {isSubmitting ? "Salvando..." : "Salvar"}
+            {isSubmitting ? 'Salvando...' : 'Salvar'}
           </Button>
         </div>
       </form>
