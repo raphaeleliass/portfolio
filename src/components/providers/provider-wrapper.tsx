@@ -1,6 +1,7 @@
 import { ThemeProvider } from "next-themes";
 import { ReactNode } from "react";
 import { Toaster } from "sonner";
+import Navbar from "../ui/navbar";
 
 export default function ProviderWrapper({
   children,
@@ -13,6 +14,7 @@ export default function ProviderWrapper({
         enableSystem
         disableTransitionOnChange
       >
+        <Navbar />
         {children}
         <Toaster />
       </ThemeProvider>
