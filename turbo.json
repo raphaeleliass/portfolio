@@ -7,6 +7,9 @@
 			"inputs": ["$TURBO_DEFAULT$", ".env"],
 			"outputs": ["dist/**"]
 		},
+		"web#build": {
+			"outputs": [".next/**", "!.next/cache/**"]
+		},
 		"dev": {
 			"persistent": true,
 			"cache": false
