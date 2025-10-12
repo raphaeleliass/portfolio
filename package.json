@@ -7,13 +7,14 @@
 		"test": "echo \"Error: no test specified\" && exit 1",
 		"dev": "turbo run dev",
 		"build": "turbo run build",
-    "db:generate":"turbo"
+		"db:generate": "turbo"
 	},
 	"keywords": [],
 	"author": "",
 	"license": "ISC",
 	"packageManager": "pnpm@10.17.0",
 	"devDependencies": {
+		"@biomejs/biome": "2.2.5",
 		"turbo": "^2.5.8"
 	}
 }
