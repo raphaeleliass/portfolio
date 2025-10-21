@@ -3,8 +3,8 @@ import clsx from "clsx";
 import { SidebarCloseIcon, SidebarOpenIcon } from "lucide-react";
 import type { HTMLAttributes, ReactNode, Ref } from "react";
 import { useSidebar } from "@/hooks/useSidebar";
-import { Button } from "../ui/button";
-import ThemeToggle from "../ui/theme-toggle";
+import { Button } from "./button";
+import ThemeToggle from "./theme-toggle";
 
 interface EditorProps<T extends HTMLElement>
 	extends HTMLAttributes<HTMLDivElement> {
@@ -134,7 +134,9 @@ function EditorContent({
 			ref={ref}
 			{...props}
 		>
-			{children}
+			<div className="mx-auto flex w-full flex-col max-sm:w-xs md:w-2xl">
+				{children}
+			</div>
 		</div>
 	);
 }
@@ -148,7 +150,7 @@ function EditorFloatingMenu({
 	return (
 		<div
 			className={clsx(
-				"sticky top-0 left-2 mb-8 flex w-fit flex-row items-center gap-0.5 rounded-md border border-muted-foreground/10 bg-muted-foreground/20 p-0.5 shadow-2xl backdrop-blur-sm",
+				"sticky top-0 left-2 mb-8 flex w-fit flex-row items-center gap-0.5 rounded-md border border-muted-foreground/10 bg-muted p-0.5 shadow-2xl backdrop-blur-sm",
 				className,
 			)}
 			data-ative={isSidebarOpen}
