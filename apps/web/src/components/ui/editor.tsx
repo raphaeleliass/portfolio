@@ -1,12 +1,7 @@
 "use client";
 import clsx from "clsx";
 import { SidebarCloseIcon, SidebarOpenIcon } from "lucide-react";
-import {
-	type HTMLAttributes,
-	type ReactNode,
-	type Ref,
-	useEffect,
-} from "react";
+import type { HTMLAttributes, ReactNode, Ref } from "react";
 import { useSidebar } from "@/hooks/useSidebar";
 import { Button } from "./button";
 
