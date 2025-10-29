@@ -42,6 +42,7 @@ export default function EditorLayoutProvider() {
 		staleTime: 60 * 1000,
 	});
 
+	//biome-ignore lint: unnecessary lint
 	useEffect(() => {
 		function handleProject() {
 			if (isSuccess && projects && projects.length > 0) {
