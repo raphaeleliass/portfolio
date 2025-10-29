@@ -1,4 +1,9 @@
+"use client";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
+import Link from "next/link";
 import type { ReactNode } from "react";
+import { Toaster } from "@/components/ui/sonner";
 import { ThemeProvider } from "./theme-provider";
 
 export default function Providers({
@@ -6,14 +11,20 @@ export default function Providers({
 }: {
 	children: Readonly<ReactNode>;
 }) {
+	const queryClient = new QueryClient();
+
 	return (
-		<ThemeProvider
-			attribute={"class"}
-			defaultTheme="system"
-			disableTransitionOnChange
-			enableSystem
-		>
-			{children}
-		</ThemeProvider>
+		<QueryClientProvider client={queryClient}>
+			<ThemeProvider
+				attribute={"class"}
+				defaultTheme="system"
+				disableTransitionOnChange
+				enableSystem
+			>
+				<Toaster richColors />
+				<ReactQueryDevtools />
+				{children}
+			</ThemeProvider>
+		</QueryClientProvider>
 	);
 }
