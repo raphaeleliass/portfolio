@@ -14,6 +14,8 @@
 		"@radix-ui/react-select": "^2.2.6",
 		"@radix-ui/react-slot": "^1.2.3",
 		"@react-symbols/icons": "^1.2.10",
+		"@tanstack/react-query": "^5.90.5",
+		"@tanstack/react-query-devtools": "^5.90.2",
 		"class-variance-authority": "^0.7.1",
 		"clsx": "^2.1.1",
 		"lucide-react": "^0.545.0",
@@ -22,6 +24,7 @@
 		"react": "19.1.0",
 		"react-dom": "19.1.0",
 		"react-resizable-panels": "^3.0.6",
+		"sonner": "^2.0.7",
 		"tailwind-merge": "^3.3.1",
 		"zustand": "^5.0.8"
 	},
