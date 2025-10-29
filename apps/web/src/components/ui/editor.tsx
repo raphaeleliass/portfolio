@@ -1,10 +1,14 @@
 "use client";
 import clsx from "clsx";
 import { SidebarCloseIcon, SidebarOpenIcon } from "lucide-react";
-import type { HTMLAttributes, ReactNode, Ref } from "react";
+import {
+	type HTMLAttributes,
+	type ReactNode,
+	type Ref,
+	useEffect,
+} from "react";
 import { useSidebar } from "@/hooks/useSidebar";
 import { Button } from "./button";
-import ThemeToggle from "./theme-toggle";
 
 interface EditorProps<T extends HTMLElement>
 	extends HTMLAttributes<HTMLDivElement> {
@@ -65,11 +69,7 @@ function EditorWrapper({
 	...props
 }: EditorProps<HTMLDivElement>) {
 	return (
-		<div
-			className="inline-flex h-full w-full items-center"
-			ref={ref}
-			{...props}
-		>
+		<div className="flex h-full w-full overflow-hidden" ref={ref} {...props}>
 			{children}
 		</div>
 	);
@@ -81,7 +81,7 @@ function EditorSidebar({
 	children,
 	...props
 }: EditorProps<HTMLDivElement>) {
-	const { isSidebarOpen } = useSidebar();
+	const { isSidebarOpen, toggleSidebar } = useSidebar();
 
 	return (
 		<aside
@@ -93,6 +93,13 @@ function EditorSidebar({
 			ref={ref}
 			{...props}
 		>
+			<Button
+				className="absolute top-1 right-0 cursor-pointer"
+				variant={"secondary"}
+				onClick={() => toggleSidebar()}
+			>
+				<SidebarCloseIcon />
+			</Button>
 			<div>
 				<h3 className="w-full border-b pb-2 text-muted-foreground text-sm uppercase">
 					Explorer
@@ -123,50 +130,29 @@ function EditorContent({
 	children,
 	...props
 }: EditorProps<HTMLDivElement>) {
-	const { isSidebarOpen } = useSidebar();
+	const { toggleSidebar, isSidebarOpen } = useSidebar();
+
 	return (
 		<div
 			className={clsx(
-				"relative h-full w-full overflow-x-hidden overflow-y-scroll bg-background/90 pt-4 pb-16 transition-all duration-300 selection:bg-foreground selection:text-background data-[active=false]:pl-4 data-[active=false]:max-sm:w-32",
+				"relative h-full w-full overflow-x-hidden overflow-y-scroll bg-background/90 pt-2 pb-16 transition-all duration-300 selection:bg-foreground selection:text-background data-[active=false]:pl-4 data-[active=false]:max-sm:w-32",
 				className,
 			)}
 			data-active={isSidebarOpen}
 			ref={ref}
 			{...props}
 		>
+			<Button
+				variant={"ghost"}
+				className="data-[active=false]:-translate-x-7 sticky top-0 left-0 cursor-pointer transition-all data-[active=false]:opacity-0 data-[active=true]:delay-300 data-[active=false]:duration-100 data-[active=true]:duration-300"
+				data-active={isSidebarOpen}
+				onClick={() => toggleSidebar()}
+			>
+				<SidebarOpenIcon />
+			</Button>
 			<div className="mx-auto flex w-full flex-col max-sm:w-xs md:w-2xl">
 				{children}
 			</div>
-		</div>
-	);
-}
-
-function EditorFloatingMenu({
-	className,
-	ref,
-	...props
-}: EditorProps<HTMLDivElement>) {
-	const { isSidebarOpen, toggleSidebar } = useSidebar();
-	return (
-		<div
-			className={clsx(
-				"sticky top-0 left-2 mb-8 flex w-fit flex-row items-center gap-0.5 rounded-md border border-muted-foreground/10 bg-muted p-0.5 shadow-2xl backdrop-blur-sm",
-				className,
-			)}
-			data-ative={isSidebarOpen}
-			ref={ref}
-			{...props}
-		>
-			<Button
-				variant={"secondary"}
-				className="bg-transparent text-muted-foreground"
-				size={"icon-sm"}
-				onClick={toggleSidebar}
-			>
-				{isSidebarOpen ? <SidebarOpenIcon /> : <SidebarCloseIcon />}
-			</Button>
-
-			<ThemeToggle className="bg-transparent text-muted-foreground" />
 		</div>
 	);
 }
@@ -178,5 +164,4 @@ export {
 	EditorSidebar,
 	EditorSidebarItem,
 	EditorContent,
-	EditorFloatingMenu,
 };

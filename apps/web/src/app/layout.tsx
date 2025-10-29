@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import { JetBrains_Mono } from "next/font/google";
 import "./globals.css";
-import EditorLayoutProvider from "@/components/EditorLayoutProvider";
 import Providers from "@/components/providers";
 
 const jetbrains = JetBrains_Mono({
@@ -22,9 +21,7 @@ export default function RootLayout({
 	return (
 		<html lang="pt-BR" suppressHydrationWarning>
 			<body className={`${jetbrains.variable} antialiased`}>
-				<Providers>
-					<EditorLayoutProvider>{children}</EditorLayoutProvider>
-				</Providers>
+				<Providers>{children}</Providers>
 			</body>
 		</html>
 	);
