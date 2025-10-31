@@ -1,15 +1,11 @@
 "use client";
-import { useQuery } from "@tanstack/react-query";
-import Image from "next/image";
-import { Activity, useEffectEvent, useState } from "react";
 import { projectsData } from "@/data";
-import type { GitHubLicense, GitHubRepository, GitHubUser } from "@/types";
-import { Button } from "../ui/button";
+// import type { GitHubLicense, GitHubRepository, GitHubUser } from "@/types";
 
-interface TypeGithubPayload extends GitHubRepository {
-	owner: GitHubUser;
-	license: GitHubLicense;
-}
+// interface TypeGithubPayload extends GitHubRepository {
+// 	owner: GitHubUser;
+// 	license: GitHubLicense;
+// }
 
 export default function Timeline() {
 	// const { data, isSuccess} = useQuery<TypeGithubPayload[]>({
