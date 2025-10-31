@@ -21,7 +21,7 @@ export default function Providers({
 				enableSystem
 			>
 				<Toaster richColors />
-				<ReactQueryDevtools />
+				<ReactQueryDevtools buttonPosition="top-right" position="right" />
 				{children}
 			</ThemeProvider>
 		</QueryClientProvider>
