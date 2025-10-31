@@ -1,10 +1,14 @@
 import type { Metadata } from "next";
-import { JetBrains_Mono } from "next/font/google";
+import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import Providers from "@/components/providers";
 
-const jetbrains = JetBrains_Mono({
-	variable: "--font-jetbrains",
+const geist = Geist({
+	variable: "--font-geist",
+	subsets: ["latin"],
+});
+const geistMono = Geist_Mono({
+	variable: "--font-geist-mono",
 	subsets: ["latin"],
 });
 
@@ -19,8 +23,8 @@ export default function RootLayout({
 	children: React.ReactNode;
 }>) {
 	return (
-		<html lang="en" suppressHydrationWarning>
-			<body className={`${jetbrains.variable} antialiased`}>
+		<html lang="pt-BR" suppressHydrationWarning>
+			<body className={`${geist.variable} ${geistMono.variable} antialiased`}>
 				<Providers>{children}</Providers>
 			</body>
 		</html>
