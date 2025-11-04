@@ -1,42 +1,57 @@
-# Project Overview
+# GEMINI.md
 
-This is a full-stack portfolio project built with a monorepo architecture using pnpm and Turborepo.
+## Project Overview
 
-**Frontend:**
-- Next.js with Turbopack
-- TypeScript
-- Tailwind CSS
-- Zustand for state management
-- Radix UI and lucide-react for UI components
+This is a personal portfolio website built with [Next.js](https://nextjs.org/) and [TypeScript](https://www.typescriptlang.org/). It is designed to showcase my skills, projects, and blog posts.
 
-**Backend:**
-- Hono (a small, fast, and web-standard API framework for the Edge)
+The project uses a modern tech stack, including:
 
-**Tooling:**
-- Biome for linting and formatting
-- Husky for pre-commit hooks
+*   **Framework:** Next.js with Turbopack
+*   **Language:** TypeScript
+*   **UI:** React with a custom component library
+*   **Styling:** Tailwind CSS
+*   **Linting & Formatting:** Biome
+*   **Package Manager:** pnpm
 
-# Building and Running
+The application is structured with a clear separation of concerns, with components, services, and data fetching logic organized into distinct directories.
 
-**Installation:**
-```bash
-pnpm install
-```
+## Building and Running
 
-**Development:**
-To start the development server for both the web and server applications:
-```bash
-pnpm dev
-```
+To get the project up and running, you will need to have [Node.js](https://nodejs.org/) and [pnpm](https://pnpm.io/) installed.
 
-**Building for Production:**
-```bash
-pnpm build
-```
+1.  **Install dependencies:**
+    ```bash
+    pnpm install
+    ```
 
-# Development Conventions
+2.  **Run the development server:**
+    ```bash
+    pnpm dev
+    ```
+    This will start the development server at `http://localhost:3000`.
 
-- Code is formatted and linted using Biome.
-- Husky is used to run pre-commit hooks, which currently runs `biome check`.
-- The project uses a monorepo structure with `apps/web` for the frontend and `apps/server` for the backend.
-- The `web` application uses Next.js with Turbopack for development and builds.
+3.  **Build for production:**
+    ```bash
+    pnpm build
+    ```
+    This will create an optimized production build in the `.next` directory.
+
+4.  **Start the production server:**
+    ```bash
+    pnpm start
+    ```
+    This will start the production server.
+
+5.  **Run the linter:**
+    ```bash
+    pnpm check
+    ```
+    This will run Biome to check for any linting or formatting issues.
+
+## Development Conventions
+
+*   **Component-Based Architecture:** The UI is built using a component-based architecture, with components located in the `src/components` directory.
+*   **Styling:** The project uses [Tailwind CSS](https://tailwindcss.com/) for styling.
+*   **Linting & Formatting:** The project uses [Biome](https://biomejs.dev/) for linting and formatting. A pre-commit hook is set up with [Husky](https://typicode.github.io/husky/) to automatically run `biome check` before each commit.
+*   **Path Aliases:** The project uses path aliases to simplify imports. The `@/` alias is configured to point to the `src` directory.
+*   **Data Fetching:** Data is fetched from external services using the `getBlogPosts` and `getPinnedRepos` functions in the `src/services` directory.
