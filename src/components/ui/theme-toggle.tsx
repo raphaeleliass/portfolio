@@ -18,8 +18,8 @@ export default function ThemeToggle({ className }: { className?: string }) {
 		<Button
 			type="button"
 			onClick={toggleTheme}
-			variant={"secondary"}
-			size={"icon-sm"}
+			variant={"ghost"}
+			size={"icon"}
 			className={className}
 		>
 			{mounted && theme === "light" ? <Moon /> : <Sun />}
