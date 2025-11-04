@@ -185,6 +185,11 @@
   * {
     @apply border-border outline-ring/50;
   }
+
+html{
+  @apply scroll-smooth;
+}
+
   body {
     @apply bg-background text-foreground font-sans;
     letter-spacing:var(--tracking-normal);
@@ -194,7 +199,7 @@
   }
 
   h1{
-    @apply font-bold font-sans text-3xl md:text-6xl ;
+    @apply font-bold font-sans text-3xl md:text-5xl ;
   }
 
   h2{
@@ -206,4 +211,7 @@
   }
 }
 
-
+::view-transition-old(root), ::view-transition-new(root) {
+    animation:none;
+    mix-blend-mode:normal;
+}
