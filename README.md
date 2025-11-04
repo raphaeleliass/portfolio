@@ -2,7 +2,7 @@
 
 Este é um projeto de portfólio pessoal desenvolvido com Next.js e TypeScript, projetado para apresentar minhas habilidades, projetos e posts de blog.
 
-> [Acesse o portfólio](https://raphaeleliass.vercel.app)
+> [Acesse o portfólio](https://raphaelelias.vercel.app)
 
 ## Tecnologias Utilizadas
 
