@@ -1,41 +1,58 @@
-# Portfolio
+# Portfólio
 
-Este é um projeto de portfólio full-stack que utiliza uma arquitetura de monorepo.
+Este é um projeto de portfólio pessoal desenvolvido com Next.js e TypeScript, projetado para apresentar minhas habilidades, projetos e posts de blog.
 
-## Tecnologias
+> [Acesse o portfólio](https://raphaeleliass.vercel.app)
 
-- **Monorepo:** pnpm & Turborepo
-- **Frontend:** Next.js (com Turbopack), TypeScript, Tailwind CSS, Zustand
-- **Backend:** Hono
-- **Tooling:** Biome, Husky
+## Tecnologias Utilizadas
 
-## Como Começar
+*   **Framework:** Next.js com Turbopack
+*   **Linguagem:** TypeScript
+*   **UI:** React
+*   **Estilização:** Tailwind CSS
+*   **Lint & Formatação:** Biome
+*   **Gerenciador de Pacotes:** pnpm
+
+## Como Executar o Projeto
 
 ### Pré-requisitos
 
-- Node.js
-- pnpm
+Antes de começar, você precisará ter o [Node.js](https://nodejs.org/) e o [pnpm](https://pnpm.io/) instalados em sua máquina.
 
 ### Instalação
 
-Clone o repositório e instale as dependências:
+1.  Instale as dependências do projeto:
+    ```bash
+    pnpm install
+    ```
+
+### Rodando em Desenvolvimento
+
+2.  Para iniciar o servidor de desenvolvimento, execute:
+    ```bash
+    pnpm dev
+    ```
+    O servidor estará disponível em `http://localhost:3000`.
+
+## Build e Produção
+
+1.  **Build para Produção:**
+    Para criar uma build otimizada para produção, execute:
+    ```bash
+    pnpm build
+    ```
+    Os arquivos da build serão gerados no diretório `.next`.
+
+2.  **Iniciando o Servidor de Produção:**
+    Para iniciar o servidor em modo de produção, utilize o comando:
+    ```bash
+    pnpm start
+    ```
+
+## Linting e Formatação
+
+O projeto utiliza o Biome para garantir a qualidade e a consistência do código. Para verificar os arquivos, execute:
 
 ```bash
-git clone https://github.com/raphaeleliass/portfolio
-cd portfolio
-pnpm install
+pnpm check
 ```
-
-### Rodando o Projeto
-
-Para iniciar o ambiente de desenvolvimento, execute:
-
-```bash
-pnpm dev
-```
-
-## Comandos
-
-- `pnpm dev`: Inicia o ambiente de desenvolvimento.
-- `pnpm build`: Gera a build de produção.
-- `pnpm test`: Executa os testes (atualmente não configurado).
