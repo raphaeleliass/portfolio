@@ -1,9 +1,9 @@
 export async function getBlogPosts() {
 	const response = await fetch(
-		"https://api-rapha-codes.vercel.app/public/all-posts",
+		"https://api-raphacodes.vercel.app/public/posts",
 		{
 			method: "GET",
-			next: { revalidate: 60 },
+			next: { revalidate: 10, tags: ["blog-posts"] },
 		},
 	);
 
