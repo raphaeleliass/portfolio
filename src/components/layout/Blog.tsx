@@ -26,7 +26,7 @@ export default function Blog({
 				<div className="mt-8 flex flex-col gap-8 md:flex-row md:gap-2">
 					{posts.slice(0, 2).map((item, i) => (
 						<a
-							href={`https://rapha-codes.vercel.app/public/post/${item.id}`}
+							href={`https://rapha-codes.vercel.app/post/${item.id}`}
 							className="group relative w-full overflow-hidden rounded border pb-2 shadow-xl"
 							key={item.id}
 						>
