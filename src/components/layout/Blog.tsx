@@ -27,6 +27,8 @@ export default function Blog({
 					{posts.slice(0, 2).map((item, i) => (
 						<a
 							href={`https://rapha-codes.vercel.app/post/${item.id}`}
+							target="_blank"
+							rel="noreferrer noopener"
 							className="group relative w-full overflow-hidden rounded border pb-2 shadow-xl"
 							key={item.id}
 						>
