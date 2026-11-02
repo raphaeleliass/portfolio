@@ -63,12 +63,12 @@
     "motion": [
       {
         "name": "entrance",
-        "value": "750ms header / 1050ms title / 650ms support",
-        "purpose": "One coordinated arrival and one-time section accents; visible SSR and reduced-motion cleanup."
+        "value": "600ms header/support / 900ms title (70ms stagger) / 600ms scroll",
+        "purpose": "First-paint CSS arrival; no hydration replay. Header/support move 6px, titles 18px without rotation, scroll groups 8px at opacity .8. Scroll triggers once at 12% visibility with 48px bottom inset. Reduced-motion support."
       },
       {
         "name": "interactive-feedback",
-        "value": "420ms diagonal arrow / 600ms underline / 480ms row shift",
+        "value": "420ms diagonal arrow / 600ms underline / 480ms row shift (4px title, 2px action)",
         "purpose": "Shared hover and keyboard-focus language from apps-portfolio."
       },
       {
