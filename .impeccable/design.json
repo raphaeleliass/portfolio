@@ -1,0 +1,165 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-11-02T23:24:58.714093+00:00",
+  "title": "Design System: Raphael Elias",
+  "extensions": {
+    "colorMeta": {
+      "background": {
+        "role": "neutral",
+        "displayName": "Warm Paper"
+      },
+      "foreground": {
+        "role": "primary",
+        "displayName": "Near-black Ink"
+      },
+      "secondary-text": {
+        "role": "neutral",
+        "displayName": "Quiet Warm Gray"
+      },
+      "border": {
+        "role": "neutral",
+        "displayName": "Paper Divider"
+      },
+      "muted": {
+        "role": "neutral",
+        "displayName": "Muted Paper"
+      },
+      "dark-background": {
+        "role": "neutral",
+        "displayName": "Black Canvas"
+      },
+      "dark-foreground": {
+        "role": "primary",
+        "displayName": "White Ink"
+      },
+      "dark-secondary-text": {
+        "role": "neutral",
+        "displayName": "Quiet Dark-mode Gray"
+      },
+      "dark-border": {
+        "role": "neutral",
+        "displayName": "Dark Divider"
+      },
+      "dark-muted": {
+        "role": "neutral",
+        "displayName": "Dark Muted Surface"
+      }
+    },
+    "typographyMeta": {
+      "display": {
+        "displayName": "Hero display",
+        "purpose": "Opening statement."
+      },
+      "headline": {
+        "displayName": "Section heading",
+        "purpose": "Editorial section introductions."
+      },
+      "editorial": {
+        "displayName": "Selective serif",
+        "purpose": "Italic heading emphasis."
+      }
+    },
+    "shadows": [],
+    "motion": [
+      {
+        "name": "entrance",
+        "value": "750ms header / 1050ms title / 650ms support",
+        "purpose": "One coordinated arrival and one-time section accents; visible SSR and reduced-motion cleanup."
+      },
+      {
+        "name": "interactive-feedback",
+        "value": "420ms diagonal arrow / 600ms underline / 480ms row shift",
+        "purpose": "Shared hover and keyboard-focus language from apps-portfolio."
+      },
+      {
+        "name": "theme",
+        "value": "360ms colors / 650ms critically damped icon spring",
+        "purpose": "Immediate theme change with interruptible icon rotation; no bounce."
+      }
+    ],
+    "breakpoints": [
+      {
+        "name": "stack-support",
+        "value": "1000px"
+      },
+      {
+        "name": "mobile",
+        "value": "640px"
+      }
+    ]
+  },
+  "components": [
+    {
+      "name": "Primary action",
+      "kind": "button",
+      "refersTo": "button-primary",
+      "description": "Large contact action with trailing arrow.",
+      "html": "<button class=\"ds-button ds-primary\">Entrar em contato <svg width=\"16\" height=\"16\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" aria-hidden=\"true\"><path d=\"M7 17 17 7M7 7h10v10\"/></svg></button>",
+      "css": ".ds-button{display:inline-flex;align-items:center;justify-content:center;gap:.5rem;white-space:nowrap;border-radius:9999px;font-family:var(--font-inter),sans-serif;font-size:.875rem;font-weight:500;height:3rem;padding:0 1rem;border:0;transition:color .2s,background-color .2s,border-color .2s,transform .2s}.ds-button:focus-visible{outline:2px solid var(--foreground);outline-offset:5px;box-shadow:0 0 0 3px color-mix(in oklab,var(--foreground) 50%,transparent)}.ds-button:active{transform:scale(.97)}.ds-button:disabled{pointer-events:none;opacity:.5}@media(prefers-reduced-motion:reduce){.ds-button{transition:none}.ds-button:active{transform:none}}.ds-primary{background:var(--foreground);color:var(--background)}.ds-primary:hover{background:color-mix(in oklab,var(--foreground) 90%,transparent)}"
+    },
+    {
+      "name": "Outline action",
+      "kind": "button",
+      "refersTo": "button-outline",
+      "description": "Apps action, disabled while the catalog is unpublished.",
+      "html": "<button class=\"ds-button ds-outline\" disabled>Explorar apps <svg width=\"16\" height=\"16\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" aria-hidden=\"true\"><path d=\"M7 17 17 7M7 7h10v10\"/></svg></button>",
+      "css": ".ds-button{display:inline-flex;align-items:center;justify-content:center;gap:.5rem;white-space:nowrap;border-radius:9999px;font-family:var(--font-inter),sans-serif;font-size:.875rem;font-weight:500;height:3rem;padding:0 1rem;border:0;transition:color .2s,background-color .2s,border-color .2s,transform .2s}.ds-button:focus-visible{outline:2px solid var(--foreground);outline-offset:5px;box-shadow:0 0 0 3px color-mix(in oklab,var(--foreground) 50%,transparent)}.ds-button:active{transform:scale(.97)}.ds-button:disabled{pointer-events:none;opacity:.5}@media(prefers-reduced-motion:reduce){.ds-button{transition:none}.ds-button:active{transform:none}}.ds-outline{background:var(--background);color:var(--foreground);border:1px solid var(--border)}.ds-outline:hover{border-color:var(--foreground)}"
+    },
+    {
+      "name": "Circular theme action",
+      "kind": "button",
+      "refersTo": "button-ghost",
+      "description": "Circular theme control.",
+      "html": "<button class=\"ds-button ds-ghost\" aria-label=\"Alternar tema claro e escuro\"><svg width=\"16\" height=\"16\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" aria-hidden=\"true\"><path d=\"M20.985 12.486a9 9 0 1 1-9.473-9.472c.405-.022.617.46.402.803a6.25 6.25 0 0 0 8.268 8.268c.344-.215.825-.004.803.401\"/></svg></button>",
+      "css": ".ds-button{display:inline-flex;align-items:center;justify-content:center;gap:.5rem;white-space:nowrap;border-radius:9999px;font-family:var(--font-inter),sans-serif;font-size:.875rem;font-weight:500;height:3rem;padding:0 1rem;border:0;transition:color .2s,background-color .2s,border-color .2s,transform .2s}.ds-button:focus-visible{outline:2px solid var(--foreground);outline-offset:5px;box-shadow:0 0 0 3px color-mix(in oklab,var(--foreground) 50%,transparent)}.ds-button:active{transform:scale(.97)}.ds-button:disabled{pointer-events:none;opacity:.5}@media(prefers-reduced-motion:reduce){.ds-button{transition:none}.ds-button:active{transform:none}}.ds-ghost{width:2.75rem;height:2.75rem;padding:0;border:1px solid var(--border);border-radius:50%;background:var(--background);color:var(--foreground)}.ds-ghost:hover{border-color:var(--foreground)}"
+    },
+    {
+      "name": "Navigation",
+      "kind": "nav",
+      "refersTo": "navigation",
+      "description": "Text navigation and noninteractive upcoming status.",
+      "html": "<nav class=\"ds-nav\" aria-label=\"Navegação principal\"><a href=\"#trajetoria\">Trajetória</a><a href=\"#sobre\">Sobre</a><a href=\"#contato\">Contato</a><span>Apps — em breve</span></nav>",
+      "css": ".ds-nav{display:flex;align-items:center;gap:2rem;font:.8125rem var(--font-inter),sans-serif}.ds-nav a{padding:.75rem 0;color:var(--foreground);text-decoration:none;text-underline-offset:5px}.ds-nav a:hover{text-decoration:underline}.ds-nav a:focus-visible{outline:2px solid var(--foreground);outline-offset:5px}.ds-nav span{color:var(--secondary-text)}@media(max-width:640px){.ds-nav{justify-content:space-between;gap:1rem;flex-wrap:wrap}}"
+    },
+    {
+      "name": "Article link",
+      "kind": "custom",
+      "refersTo": "article-link",
+      "description": "Editorial article row with animated bottom rule.",
+      "html": "<a class=\"ds-article\" href=\"#artigos\"><time>Artigos</time><h3>Aprender. Compartilhar.</h3><span>Ler artigo <svg width=\"16\" height=\"16\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" aria-hidden=\"true\"><path d=\"M7 17 17 7M7 7h10v10\"/></svg></span></a>",
+      "css": ".ds-article{display:block;position:relative;padding-bottom:1.5rem;color:var(--foreground);text-decoration:none;font-family:var(--font-inter),sans-serif}.ds-article time{display:block;color:var(--secondary-text);font-size:.75rem;margin-bottom:.75rem;font-variant-numeric:tabular-nums}.ds-article h3{margin:0;font-family:var(--font-entity),sans-serif;font-size:1.375rem;font-weight:600;letter-spacing:-.025em;line-height:1.4}.ds-article span{display:inline-flex;align-items:center;gap:.5rem;margin-top:1rem;color:var(--secondary-text);font-size:.8125rem}.ds-article:after{content:\"\";position:absolute;bottom:0;left:0;height:1px;width:100%;background:var(--foreground);transform:scaleX(0);transform-origin:left;transition:transform 600ms cubic-bezier(.16,1,.3,1)}.ds-article:hover:after,.ds-article:focus-visible:after{transform:scaleX(1)}.ds-article:focus-visible{outline:2px solid var(--foreground);outline-offset:5px}.ds-article svg{transition:transform 240ms cubic-bezier(.16,1,.3,1)}.ds-article:hover svg{transform:translate(2px,-2px)}@media(prefers-reduced-motion:reduce){.ds-article:after,.ds-article svg{transition:none}}"
+    }
+  ],
+  "narrative": {
+    "northStar": "Editorial minimalism with precise response",
+    "overview": "An editorial, minimal portfolio built around confident typography, generous space, and a uniform neutral canvas. Geist gives display headings their structure; Manrope identifies entries and articles; Inter keeps reading and controls clear; Instrument Serif italic adds selective emphasis.\n\nThe approved raphael-design identity pairs with Apple-inspired immediate feedback and restrained motion. Content stays visible without JavaScript animation, while light and dark themes preserve the same hierarchy. Decorative glass and ornamental gradients are outside this visual direction.",
+    "keyCharacteristics": [
+      "Uniform neutral surfaces and fine separators.",
+      "Expressive headings with selective italic serif emphasis.",
+      "Open editorial grids, compact controls, and clear keyboard feedback."
+    ],
+    "rules": [
+      {
+        "name": "The Semantic Theme Rule",
+        "body": "Use the existing semantic variables so every surface and control follows the selected theme.",
+        "section": "colors"
+      },
+      {
+        "name": "The Selective Serif Rule",
+        "body": "Keep serif emphasis inside headings rather than making it the default reading face.",
+        "section": "typography"
+      }
+    ],
+    "dos": [
+      "Do use the existing semantic CSS variables for both themes.",
+      "Do reserve Instrument Serif italic for selective heading emphasis.",
+      "Do preserve visible focus, disabled states, and reduced-motion behavior.",
+      "Do use open lists and separators for trajectory, technologies, and articles."
+    ],
+    "donts": [
+      "Don't add decorative glass, ornamental gradients, or navigation-delaying animation.",
+      "Don't turn every content group into a raised card.",
+      "Don't introduce accent colors or additional font families without a new visual decision."
+    ]
+  }
+}
