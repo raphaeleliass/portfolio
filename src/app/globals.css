@@ -126,7 +126,19 @@
 .wordmark,.site-header nav a,.text-link,.contact-links a,.portfolio-footer a { background-image:linear-gradient(currentColor,currentColor); background-position:left bottom; background-size:0% 1px; background-repeat:no-repeat; }
 .wordmark:hover,.wordmark:focus-visible,.site-header nav a:hover,.site-header nav a:focus-visible,.text-link:hover,.text-link:focus-visible,.contact-links a:hover,.contact-links a:focus-visible,.portfolio-footer a:hover,.portfolio-footer a:focus-visible { background-size:100% 1px; }
 .article-link { padding-right:.5rem; }
+@keyframes portfolio-arrive {
+ from { opacity:.8; transform:translateY(6px); }
+ to { opacity:1; transform:translateY(0); }
+}
+@keyframes portfolio-title {
+ from { opacity:.75; transform:translateY(18px); }
+ to { opacity:1; transform:translateY(0); }
+}
 @media (prefers-reduced-motion:no-preference) {
+ .site-header > .wordmark,.site-header > button,.site-header nav > * { animation:portfolio-arrive 600ms var(--motion-ease) both; }
+ .title-line > span { animation:portfolio-title 900ms var(--motion-ease) both; }
+ .title-line + .title-line > span { animation-delay:70ms; }
+ .hero-identity,.hero-bottom,.hero-scroll { animation:portfolio-arrive 600ms var(--motion-ease) both; }
  body { transition:background-color 360ms ease,color 360ms ease; }
  p,.entry-meta,.article-link time,.technology-list li,.contact-links,.portfolio-footer { transition:color 360ms ease; }
  .content-section,.contact-section,.portfolio-footer { transition:border-color 360ms ease; }
@@ -135,8 +147,8 @@
  a:hover .motion-arrow>svg:first-child,a:focus-visible .motion-arrow>svg:first-child { transform:translate(130%,-130%); }
  a:hover .motion-arrow>svg+svg,a:focus-visible .motion-arrow>svg+svg { transform:translate(0,0); }
  .article-link>h3,.article-link>time,.article-link>.text-link { transition:transform 480ms var(--motion-ease),color 360ms ease; }
- .article-link:is(:hover,:focus-visible)>h3,.article-link:is(:hover,:focus-visible)>time { transform:translateX(8px); }
- .article-link:is(:hover,:focus-visible)>.text-link { transform:translateX(4px); }
+ .article-link:is(:hover,:focus-visible)>h3,.article-link:is(:hover,:focus-visible)>time { transform:translateX(4px); }
+ .article-link:is(:hover,:focus-visible)>.text-link { transform:translateX(2px); }
 }
 @media (prefers-contrast:more) { :root { --secondary-text:var(--foreground); --border:var(--foreground); } }
 ::view-transition-old(root),::view-transition-new(root) { animation:none; mix-blend-mode:normal; }
