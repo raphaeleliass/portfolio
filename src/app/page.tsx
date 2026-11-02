@@ -6,36 +6,43 @@ import Contact from "@/components/layout/Contact";
 import FloatingMenu from "@/components/layout/FloatingMenu";
 import Skills from "@/components/layout/Skills";
 import Timeline from "@/components/layout/Timeline";
-import TimelineSkeleton from "@/components/layout/TimelineSkeleton";
+import PortfolioMotion from "@/components/portfolio-motion";
 import { Skeleton } from "@/components/ui/skeleton";
 import { getBlogPosts } from "@/services/getBlogPosts";
-import { getPinnedRepos } from "@/services/getPinnedRepos";
 
 export default async function Home() {
 	"use cache";
-
 	cacheLife("minutes");
-
-	const pinned = getPinnedRepos();
-	const blogPosts = getBlogPosts();
-
+	const posts = getBlogPosts();
 	return (
-		<main className="relative mx-auto w-1/3 space-y-20 px-6 pt-24 pb-12 max-sm:w-sm max-sm:px-2 max-sm:py-12 max-[900px]:w-xl">
-			<About />
-
-			<Suspense fallback={<TimelineSkeleton />}>
-				<Timeline pinnedData={pinned} />
-			</Suspense>
-
-			<Skills />
-
-			<Suspense fallback={<Skeleton className="aspect-square" />}>
-				<Blog postsData={blogPosts} />
-			</Suspense>
-
-			<Contact />
-
+		<PortfolioMotion>
+			<a className="skip-link" href="#conteudo">
+				Pular para o conteúdo
+			</a>
 			<FloatingMenu />
-		</main>
+			<main id="conteudo" className="portfolio-shell">
+				<About />
+				<Timeline />
+				<Skills />
+				<Suspense
+					fallback={
+						<section
+							className="content-section"
+							aria-label="Carregando artigos"
+						>
+							<Skeleton className="h-32 w-full" />
+						</section>
+					}
+				>
+					<Blog postsData={posts} />
+				</Suspense>
+				<Contact />
+			</main>
+			<footer className="portfolio-footer">
+				<span>Raphael Elias</span>
+				<span>Desenvolvedor full-stack</span>
+				<a href="#inicio">Voltar ao início ↑</a>
+			</footer>
+		</PortfolioMotion>
 	);
 }

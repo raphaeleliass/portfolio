@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import { Geist, Instrument_Serif, Inter, Manrope } from "next/font/google";
 import "./globals.css";
 import Providers from "@/components/providers";
 
@@ -7,19 +7,27 @@ const geist = Geist({
 	variable: "--font-geist",
 	subsets: ["latin"],
 });
-const geistMono = Geist_Mono({
-	variable: "--font-geist-mono",
+const manrope = Manrope({
+	variable: "--font-entity",
 	subsets: ["latin"],
+	weight: "600",
+});
+const inter = Inter({ variable: "--font-inter", subsets: ["latin"] });
+const editorial = Instrument_Serif({
+	variable: "--font-editorial",
+	subsets: ["latin"],
+	weight: "400",
+	style: "italic",
 });
 
 export const metadata: Metadata = {
-	metadataBase: new URL("https://raphaelelias.vercel.app"),
+	metadataBase: new URL("https://raphaelelias.dev"),
 	title: {
 		default: "Raphael Elias",
 		template: "%s | Raphael Elias",
 	},
 	description:
-		"Desenvolvedor Full-Stack, criador de soluções inovadoras e eficientes. Explore meu portfólio para ver meus projetos e artigos.",
+		"Raphael Elias, desenvolvedor full-stack. Conheça minha trajetória, acesse meus apps e leia meus artigos sobre desenvolvimento.",
 	keywords: [
 		"Desenvolvedor Full-Stack",
 		"Next.js",
@@ -36,12 +44,12 @@ export const metadata: Metadata = {
 	openGraph: {
 		title: "Raphael Elias - Desenvolvedor Full-Stack",
 		description:
-			"Desenvolvedor Full-Stack criador de soluções inovadoras e eficientes.",
-		url: "https://raphaelelias.vercel.app",
+			"Raphael Elias, desenvolvedor full-stack. Conheça minha trajetória, acesse meus apps e leia meus artigos sobre desenvolvimento.",
+		url: "https://raphaelelias.dev",
 		siteName: "Raphael Elias",
 		images: [
 			{
-				url: "https://raphaelelias.vercel.app/website-preview.png",
+				url: "https://raphaelelias.dev/website-preview.png",
 				width: 1280,
 				height: 800,
 			},
@@ -53,9 +61,9 @@ export const metadata: Metadata = {
 		card: "summary_large_image",
 		title: "Raphael Elias - Desenvolvedor Full-Stack",
 		description:
-			"Desenvolvedor Full-Stack apaixonado por criar soluções inovadoras e eficientes.",
+			"Raphael Elias, desenvolvedor full-stack. Conheça minha trajetória, acesse meus apps e leia meus artigos sobre desenvolvimento.",
 		creator: "@faeleliass",
-		images: ["https://raphaelelias.vercel.app/website-preview.png"],
+		images: ["https://raphaelelias.dev/website-preview.png"],
 	},
 };
 
@@ -66,7 +74,9 @@ export default function RootLayout({
 }>) {
 	return (
 		<html lang="pt-BR" suppressHydrationWarning>
-			<body className={`${geist.variable} ${geistMono.variable} antialiased`}>
+			<body
+				className={`${geist.variable} ${inter.variable} ${editorial.variable} ${manrope.variable} antialiased`}
+			>
 				<Providers>{children}</Providers>
 			</body>
 		</html>

@@ -1,42 +1,42 @@
 export const technologies = [
 	{
-		title: "html",
+		title: "HTML",
 	},
 	{
-		title: "css",
+		title: "CSS",
 	},
 	{
-		title: "javascript",
+		title: "JavaScript",
 	},
 	{
-		title: "typescript",
+		title: "TypeScript",
 	},
 	{
-		title: "react",
+		title: "React",
 	},
 	{
-		title: "next",
+		title: "Next.js",
 	},
 	{
-		title: "express",
+		title: "Express",
 	},
 	{
-		title: "hono",
+		title: "Hono",
 	},
 	{
-		title: "drizzle",
+		title: "Drizzle",
 	},
 	{
-		title: "prisma",
+		title: "Prisma",
 	},
 	{
-		title: "node",
+		title: "Node.js",
 	},
 	{
-		title: "bun",
+		title: "Bun",
 	},
 	{
-		title: "postgresSQL",
+		title: "PostgreSQL",
 	},
 	{
 		title: "SQLite",

@@ -8,12 +8,7 @@ export default function Providers({
 	children: Readonly<ReactNode>;
 }) {
 	return (
-		<ThemeProvider
-			attribute={"class"}
-			defaultTheme="system"
-			disableTransitionOnChange
-			enableSystem
-		>
+		<ThemeProvider attribute={"class"} defaultTheme="system" enableSystem>
 			<Toaster richColors />
 
 			{children}
