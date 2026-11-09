@@ -26,11 +26,11 @@
  --radius-md: .5rem;
  --radius-lg: .75rem;
 }
-:root { --background:#f9f8f4; --foreground:#181818; --secondary-text:#62615d; --border:#ddddd5; --muted:#eeede7; --motion-ease:cubic-bezier(.16,1,.3,1); --motion-response:420ms; color-scheme:light; }
+:root { --background:#f9f8f4; --foreground:#181818; --secondary-text:#62615d; --border:#ddddd5; --muted:#eeede7; --motion-ease:cubic-bezier(.16,1,.3,1); --motion-response:320ms; color-scheme:light; }
 .dark { --background:#000; --foreground:#fff; --secondary-text:#a8a7a2; --border:#393934; --muted:#1a1a18; color-scheme:dark; }
 @layer base {
  * { border-color:var(--border); }
- html { scroll-behavior:smooth; scroll-padding-top:6rem; }
+ html { position:relative; scroll-behavior:smooth; scroll-padding-top:6rem; }
  body { margin:0; background:var(--background); color:var(--foreground); font-family:var(--font-inter),sans-serif; -webkit-font-smoothing:antialiased; }
  button,a { -webkit-tap-highlight-color:transparent; }
  a { text-decoration:none; }
@@ -61,8 +61,7 @@
 .hero-bottom>p { max-width:46ch; font-size:1rem; }
 .hero-actions { display:flex; gap:.75rem; padding-top:.25rem; }
 .hero-scroll { display:inline-flex; align-items:center; gap:.75rem; margin-top:4.5rem; font-size:.75rem; color:var(--secondary-text); padding-block:.75rem; }
-.hero-scroll svg { transition:transform 240ms ease; }
-.hero-scroll:hover svg { transform:translateY(3px); }
+
 .content-section { padding-block:5.5rem; border-top:1px solid var(--border); }
 .section-grid { display:grid; grid-template-columns:minmax(0,.8fr) minmax(0,1.2fr); gap:clamp(3rem,8vw,9rem); }
 .section-intro h2 { font-size:clamp(2rem,3.5vw,3rem); line-height:1.14; letter-spacing:-.03em; font-weight:600; }
@@ -79,7 +78,7 @@
 .section-intro>.text-link { margin-top:1.5rem; padding-block:.5rem; }
 .article-list { display:flex; flex-direction:column; gap:2rem; }
 .article-link { position:relative; padding-bottom:1.5rem; }
-.article-link::after { content:""; position:absolute; bottom:0; left:0; height:1px; width:100%; background:var(--border); transform:scaleX(0); transform-origin:left; transition:transform 600ms cubic-bezier(.16,1,.3,1); }
+.article-link::after { content:""; position:absolute; bottom:0; left:0; height:1px; width:100%; background:var(--border); transform:scaleX(0); transform-origin:left; transition:transform 440ms var(--motion-ease); }
 .article-link:hover::after,.article-link:focus-visible::after { transform:scaleX(1); }
 .article-link .text-link { margin-top:1rem; color:var(--secondary-text); }
 
@@ -126,29 +125,20 @@
 .wordmark,.site-header nav a,.text-link,.contact-links a,.portfolio-footer a { background-image:linear-gradient(currentColor,currentColor); background-position:left bottom; background-size:0% 1px; background-repeat:no-repeat; }
 .wordmark:hover,.wordmark:focus-visible,.site-header nav a:hover,.site-header nav a:focus-visible,.text-link:hover,.text-link:focus-visible,.contact-links a:hover,.contact-links a:focus-visible,.portfolio-footer a:hover,.portfolio-footer a:focus-visible { background-size:100% 1px; }
 .article-link { padding-right:.5rem; }
-@keyframes portfolio-arrive {
- from { opacity:.8; transform:translateY(6px); }
- to { opacity:1; transform:translateY(0); }
-}
-@keyframes portfolio-title {
- from { opacity:.75; transform:translateY(18px); }
- to { opacity:1; transform:translateY(0); }
-}
 @media (prefers-reduced-motion:no-preference) {
- .site-header > .wordmark,.site-header > button,.site-header nav > * { animation:portfolio-arrive 600ms var(--motion-ease) both; }
- .title-line > span { animation:portfolio-title 900ms var(--motion-ease) both; }
- .title-line + .title-line > span { animation-delay:70ms; }
- .hero-identity,.hero-bottom,.hero-scroll { animation:portfolio-arrive 600ms var(--motion-ease) both; }
- body { transition:background-color 360ms ease,color 360ms ease; }
- p,.entry-meta,.article-link time,.technology-list li,.contact-links,.portfolio-footer { transition:color 360ms ease; }
- .content-section,.contact-section,.portfolio-footer { transition:border-color 360ms ease; }
- .wordmark,.site-header nav a,.text-link,.contact-links a,.portfolio-footer a { transition:background-size 360ms var(--motion-ease); }
+ body { transition:background-color 400ms ease,color 400ms ease; }
+ p,.entry-meta,.article-link time,.technology-list li,.contact-links,.portfolio-footer { transition:color 400ms ease; }
+ .content-section,.contact-section,.portfolio-footer { transition:border-color 400ms ease; }
+ .wordmark,.site-header nav a,.text-link,.contact-links a,.portfolio-footer a { transition:background-size 400ms var(--motion-ease); }
  .motion-arrow>svg { transition:transform var(--motion-response) var(--motion-ease); }
- a:hover .motion-arrow>svg:first-child,a:focus-visible .motion-arrow>svg:first-child { transform:translate(130%,-130%); }
- a:hover .motion-arrow>svg+svg,a:focus-visible .motion-arrow>svg+svg { transform:translate(0,0); }
- .article-link>h3,.article-link>time,.article-link>.text-link { transition:transform 480ms var(--motion-ease),color 360ms ease; }
- .article-link:is(:hover,:focus-visible)>h3,.article-link:is(:hover,:focus-visible)>time { transform:translateX(4px); }
- .article-link:is(:hover,:focus-visible)>.text-link { transform:translateX(2px); }
+ a:is(:hover,:focus-visible) .motion-arrow>svg:first-child { transform:translate(130%,-130%); }
+ a:is(:hover,:focus-visible) .motion-arrow>svg+svg { transform:translate(0,0); }
+ .hero-scroll svg { transition:transform 320ms var(--motion-ease); }
+ .hero-scroll:is(:hover,:focus-visible) svg { transform:translateY(4px); }
+ .article-link>h3 { transition:color 240ms ease; }
+ .article-link:is(:hover,:focus-visible)>h3 { color:var(--secondary-text); }
+ [data-slot="button"] { transition:background-color 240ms ease,border-color 240ms ease,color 240ms ease,box-shadow 240ms ease; }
+ [data-slot="button"]:active { box-shadow:inset 0 0 0 2px var(--secondary-text); }
 }
 @media (prefers-contrast:more) { :root { --secondary-text:var(--foreground); --border:var(--foreground); } }
 ::view-transition-old(root),::view-transition-new(root) { animation:none; mix-blend-mode:normal; }

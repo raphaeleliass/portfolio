@@ -9,6 +9,7 @@
 		"check": "biome check"
 	},
 	"dependencies": {
+		"@gsap/react": "^2.1.2",
 		"@radix-ui/react-accordion": "^1.2.12",
 		"@radix-ui/react-dropdown-menu": "^2.1.16",
 		"@radix-ui/react-select": "^2.2.6",
@@ -20,6 +21,7 @@
 		"class-variance-authority": "^0.7.1",
 		"clsx": "^2.1.1",
 		"eslint-config-next": "^16.0.1",
+		"gsap": "^3.15.0",
 		"lucide-react": "^0.545.0",
 		"motion": "^12.23.24",
 		"next": "16.0.7",

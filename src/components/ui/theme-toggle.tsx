@@ -1,16 +1,44 @@
 "use client";
+import { useGSAP } from "@gsap/react";
+import gsap from "gsap";
 import { Moon, Sun } from "lucide-react";
-import { motion, useReducedMotion } from "motion/react";
 import { useTheme } from "next-themes";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Button } from "./button";
 
 export default function ThemeToggle({ className }: { className?: string }) {
-	const reduceMotion = useReducedMotion();
+	const symbol = useRef<HTMLSpanElement>(null);
 	const { setTheme, resolvedTheme } = useTheme();
 	const [mounted, setMounted] = useState<boolean>(false);
 
 	useEffect(() => setMounted(true), []);
+
+	useGSAP(
+		() => {
+			if (!mounted) return;
+			const media = gsap.matchMedia();
+			media.add("(prefers-reduced-motion: no-preference)", () => {
+				gsap.fromTo(
+					symbol.current,
+					{ rotation: -60, scale: 0.7, opacity: 0 },
+					{
+						rotation: 0,
+						scale: 1,
+						opacity: 1,
+						duration: 0.45,
+						ease: "expo.out",
+						clearProps: "transform,opacity",
+					},
+				);
+			});
+			return () => media.revert();
+		},
+		{
+			scope: symbol,
+			dependencies: [mounted, resolvedTheme],
+			revertOnUpdate: true,
+		},
+	);
 
 	function toggleTheme() {
 		setTheme(resolvedTheme === "light" ? "dark" : "light");
@@ -30,22 +58,13 @@ export default function ThemeToggle({ className }: { className?: string }) {
 			size={"icon"}
 			className={className}
 		>
-			<motion.span
-				className="theme-symbol"
-				initial={false}
-				animate={{ rotate: mounted && resolvedTheme === "dark" ? 90 : 0 }}
-				transition={
-					reduceMotion
-						? { duration: 0 }
-						: { type: "spring", bounce: 0, duration: 0.65 }
-				}
-			>
+			<span ref={symbol} className="theme-symbol">
 				{mounted && resolvedTheme === "dark" ? (
 					<Sun aria-hidden="true" />
 				) : (
 					<Moon aria-hidden="true" />
 				)}
-			</motion.span>
+			</span>
 		</Button>
 	);
 }
