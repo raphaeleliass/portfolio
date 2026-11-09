@@ -128,7 +128,11 @@ Keep reading measures purposeful: hero copy (46ch), section introductions (29ch;
 
 The approved page is flat. No decorative shadows, translucent materials, or glass layers establish hierarchy. Continuous backgrounds, whitespace, fine borders, and type scale provide depth. Button focus rings are interaction feedback, not elevation.
 
-Motion follows the apps-portfolio reference: header entry (600ms, 6px), title lines (900ms, 70ms stagger, 18px without rotation), supporting content (600ms, 6px) and one-time section accents (600ms, 8px, opacity .8 to 1). Initial header and hero entrances run in CSS from the first paint, independently of hydration. PortfolioMotion observes only content that was below the viewport when it initialized, with cleanup; it never resets already-visible content. Scroll entrances group related content rather than animating each row: they trigger once at 12% visibility with a 48px inset from the viewport bottom. Shared diagonal arrow pairs travel in (420ms); article rows shift (4px) and reveal a line in (600ms). Theme colors transition in (360ms), and the icon retargets through a critically damped spring (650ms, no bounce). Reduced motion completes active entrances and disables displacement, transitions and smooth scrolling. No route delays or decorative gestures are introduced.
+Motion uses GSAP with useGSAP and ScrollTrigger, scoped to refs and reverted on cleanup. The streamed blog owns an independent scope so its DOM is animated only after hydration. Default HTML/CSS stays fully visible without JavaScript; playback begins once fonts are ready. The focal entrance is a masked editorial title: lines rise from 110%, rotate from 2 degrees and scale from .96 to 1 with expo.out (1.35s, .14s stagger, starting at .2s). Header children enter at 0s (.8s, .18s total stagger); identity children at .12s (.9s, .08s stagger); supporting copy/actions at .48s (1s, .24s total stagger). The composition settles within 1.72s. Supporting groups below the first viewport wait for their own scroll reveal.
+
+Scroll groups reveal once at clamped top 86%, independently of subsequent scrolling: .98 to natural scale, 28px travel (16px on mobile), opacity 0 to 1, .95s expo.out and child stagger capped at .24s (.16s on mobile). Includes section introductions, trajectory entries, biography, technologies, streamed articles, contact and footer. Already-passed content stays visible on restored scroll. Keyboard focus completes its group's animation immediately. ResizeObserver refreshes trigger measurements as streamed content changes layout. Reduced motion reverts all GSAP poses and disables spatial CSS feedback.
+
+Controls use newly authored arrow exchanges (320ms), underlines (400–440ms), press inset feedback and a GSAP theme-symbol turn (.45s expo.out). Theme colors transition over 400ms. No scroll interception, pinning or persistent loops. Inline animation properties are cleared after completion.
 
 ## Shapes
 
@@ -136,7 +140,7 @@ Buttons are pills; the portrait is circular. Existing small, medium, and large r
 
 ## Components
 
-- **Primary action:** the local Button in large size, used for contact. Its height is (3rem), text is (.875rem) at weight (500), and icon-bearing large buttons use (1rem) horizontal padding. Hover reduces the fill to 90%; pressing scales to (.97).
+- **Primary action:** the local Button in large size, used for contact. Its height is (3rem), text is (.875rem) at weight (500), and icon-bearing large buttons use (1rem) horizontal padding. Hover reduces the fill to 90%; pressing adds a subtle inset line.
 - **Outline action:** the same large pill with a border. The unpublished apps action is disabled, has 50% opacity, and is accompanied by a separate status note. Do not imply that its destination is available.
 - **Theme action:** the theme toggle uses the existing outline Button with a (2.75rem) square hit area, circular shape, and an accessible name.
 - **Navigation:** compact text links have (.75rem) vertical padding, hover underlines, and a distinct non-link upcoming-apps label. Preserve semantic navigation and keyboard access.

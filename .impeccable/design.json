@@ -63,18 +63,18 @@
     "motion": [
       {
         "name": "entrance",
-        "value": "600ms header/support / 900ms title (70ms stagger) / 600ms scroll",
-        "purpose": "First-paint CSS arrival; no hydration replay. Header/support move 6px, titles 18px without rotation, scroll groups 8px at opacity .8. Scroll triggers once at 12% visibility with 48px bottom inset. Reduced-motion support."
+        "value": "GSAP opening 1.72s / title 1.35s with .14s stagger / one-shot scroll .95s",
+        "purpose": "Font-ready masked title with .96 scale and 2-degree rotation; visible SSR content. Scoped useGSAP cleanup and independent streamed blog. Scroll groups reveal at clamped top 86%, scale .98 to 1, opacity 0 to 1, 28px travel (16px mobile), stagger capped .24s (.16s mobile). Keyboard focus completes its group; reduced motion reverts poses."
       },
       {
         "name": "interactive-feedback",
-        "value": "420ms diagonal arrow / 600ms underline / 480ms row shift (4px title, 2px action)",
-        "purpose": "Shared hover and keyboard-focus language from apps-portfolio."
+        "value": "320ms diagonal arrow / 400–440ms underline / inset press feedback",
+        "purpose": "Consistent hover and keyboard-focus feedback without competing transform transitions."
       },
       {
         "name": "theme",
-        "value": "360ms colors / 650ms critically damped icon spring",
-        "purpose": "Immediate theme change with interruptible icon rotation; no bounce."
+        "value": "400ms colors / 450ms GSAP icon turn",
+        "purpose": "Immediate theme change with expo.out icon rotation and scale; reduced-motion support."
       }
     ],
     "breakpoints": [
