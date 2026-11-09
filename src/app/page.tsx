@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import { cacheLife } from "next/cache";
 import { Suspense } from "react";
 import About from "@/components/layout/About";
@@ -10,12 +11,55 @@ import PortfolioMotion from "@/components/portfolio-motion";
 import { Skeleton } from "@/components/ui/skeleton";
 import { getBlogPosts } from "@/services/getBlogPosts";
 
+export const metadata: Metadata = {
+	alternates: { canonical: "https://raphaelelias.dev" },
+};
+
+const structuredData = {
+	"@context": "https://schema.org",
+	"@graph": [
+		{
+			"@type": "Person",
+			"@id": "https://raphaelelias.dev/#person",
+			name: "Raphael Elias",
+			url: "https://raphaelelias.dev",
+			image: "https://github.com/raphaeleliass.png",
+			jobTitle: "Desenvolvedor full-stack",
+			sameAs: [
+				"https://github.com/raphaeleliass",
+				"https://linkedin.com/in/raphaeleliass",
+			],
+			knowsAbout: ["React", "Next.js", "TypeScript", "Node.js"],
+		},
+		{
+			"@type": "WebSite",
+			"@id": "https://raphaelelias.dev/#website",
+			url: "https://raphaelelias.dev",
+			name: "Raphael Elias",
+			inLanguage: "pt-BR",
+			publisher: { "@id": "https://raphaelelias.dev/#person" },
+		},
+		{
+			"@type": "ProfilePage",
+			"@id": "https://raphaelelias.dev/#profile",
+			url: "https://raphaelelias.dev",
+			name: "Raphael Elias | Desenvolvedor Full-Stack React e Next.js",
+			inLanguage: "pt-BR",
+			isPartOf: { "@id": "https://raphaelelias.dev/#website" },
+			mainEntity: { "@id": "https://raphaelelias.dev/#person" },
+		},
+	],
+};
+
 export default async function Home() {
 	"use cache";
 	cacheLife("minutes");
 	const posts = getBlogPosts();
 	return (
 		<PortfolioMotion>
+			<script type="application/ld+json">
+				{JSON.stringify(structuredData).replace(/</g, "\\u003c")}
+			</script>
 			<a className="skip-link" href="#conteudo">
 				Pular para o conteúdo
 			</a>

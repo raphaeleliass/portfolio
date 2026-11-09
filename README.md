@@ -1,8 +1,8 @@
 # Portfólio Pessoal - Raphael Elias
 
-[![Portfolio Preview](https://raw.githubusercontent.com/raphaeleliass/portfolio/master/public/website-preview.png)](https://raphaelelias.vercel.app/)
+[![Portfolio Preview](https://raw.githubusercontent.com/raphaeleliass/portfolio/master/public/website-preview.png)](https://raphaelelias.dev/)
 
-> **Acesse o portfólio:** [https://raphaelelias.vercel.app](https://raphaelelias.vercel.app)
+> **Acesse o portfólio:** [https://raphaelelias.dev](https://raphaelelias.dev)
 
 ---
 

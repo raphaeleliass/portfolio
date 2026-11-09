@@ -23,35 +23,36 @@ const editorial = Instrument_Serif({
 export const metadata: Metadata = {
 	metadataBase: new URL("https://raphaelelias.dev"),
 	title: {
-		default: "Raphael Elias",
+		default: "Raphael Elias | Desenvolvedor Full-Stack React e Next.js",
 		template: "%s | Raphael Elias",
 	},
 	description:
-		"Raphael Elias, desenvolvedor full-stack. Conheça minha trajetória, acesse meus apps e leia meus artigos sobre desenvolvimento.",
-	keywords: [
-		"Desenvolvedor Full-Stack",
-		"Next.js",
-		"React",
-		"TypeScript",
-		"Node.js",
-		"Tailwind CSS",
-		"Portfolio",
-		"Blog",
-		"Projetos",
-	],
-	authors: [{ name: "Raphael Elias" }],
-	robots: "index, follow",
+		"Raphael Elias, desenvolvedor full-stack com React, Next.js, TypeScript e Node.js. Conheça minha trajetória, explore meus apps e leia artigos de desenvolvimento web.",
+	authors: [{ name: "Raphael Elias", url: "https://raphaelelias.dev" }],
+	creator: "Raphael Elias",
+	robots: {
+		index: true,
+		follow: true,
+		googleBot: {
+			index: true,
+			follow: true,
+			"max-image-preview": "large",
+			"max-snippet": -1,
+			"max-video-preview": -1,
+		},
+	},
 	openGraph: {
-		title: "Raphael Elias - Desenvolvedor Full-Stack",
+		title: "Raphael Elias | Desenvolvedor Full-Stack React e Next.js",
 		description:
-			"Raphael Elias, desenvolvedor full-stack. Conheça minha trajetória, acesse meus apps e leia meus artigos sobre desenvolvimento.",
+			"Raphael Elias, desenvolvedor full-stack com React, Next.js, TypeScript e Node.js. Conheça minha trajetória, explore meus apps e leia artigos de desenvolvimento web.",
 		url: "https://raphaelelias.dev",
 		siteName: "Raphael Elias",
 		images: [
 			{
 				url: "https://raphaelelias.dev/website-preview.png",
-				width: 1280,
-				height: 800,
+				width: 883,
+				height: 552,
+				alt: "Portfólio de Raphael Elias, desenvolvedor full-stack",
 			},
 		],
 		locale: "pt_BR",
@@ -59,11 +60,16 @@ export const metadata: Metadata = {
 	},
 	twitter: {
 		card: "summary_large_image",
-		title: "Raphael Elias - Desenvolvedor Full-Stack",
+		title: "Raphael Elias | Desenvolvedor Full-Stack React e Next.js",
 		description:
-			"Raphael Elias, desenvolvedor full-stack. Conheça minha trajetória, acesse meus apps e leia meus artigos sobre desenvolvimento.",
+			"Raphael Elias, desenvolvedor full-stack com React, Next.js, TypeScript e Node.js. Conheça minha trajetória, explore meus apps e leia artigos de desenvolvimento web.",
 		creator: "@faeleliass",
-		images: ["https://raphaelelias.dev/website-preview.png"],
+		images: [
+			{
+				url: "https://raphaelelias.dev/website-preview.png",
+				alt: "Portfólio de Raphael Elias, desenvolvedor full-stack",
+			},
+		],
 	},
 };
 
